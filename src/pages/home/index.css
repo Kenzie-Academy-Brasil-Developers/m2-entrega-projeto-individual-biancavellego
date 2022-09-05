@@ -1,0 +1,49 @@
+body {
+    position: relative;
+}
+
+.menu__container {
+    display: flex;
+}
+
+.menu__logo {
+    position: absolute;
+    top: 0;
+}
+
+.menu__container__user__image {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.menu__nav__bar {
+    position: absolute;
+    top: 10px;
+}
+
+.menu__nav__bar ul {
+    display: flex;
+    position: absolute;
+    top: 0;
+}
+
+#main__background__video {
+    position: relative;
+    width: 1200px;
+}
+
+.main__title__container {
+    position: absolute;
+    bottom: 0;
+}
+
+.main__title__container h1 {
+
+}
+
+.main__title__container p {
+
+
+}
+
