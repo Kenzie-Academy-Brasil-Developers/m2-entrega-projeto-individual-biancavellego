@@ -41,8 +41,38 @@ h1 {
     margin-right: 2px;
 }
 
-#mode__button {
-    
+#dark__toggle {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 50px;
+    border: 2px solid var(--dark-grey);
+    background-color: var(--title-color);
+    cursor: pointer;
+    padding: 5px;
+    width: 40px;
+    margin: 0px 5px;
+}
+
+#dark__toggle .ball {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    background-color: var(--dark-grey);
+    border-radius: 50%;
+    height: 22px;
+    width: 22px;
+    transform: var(--ball-transition);
+    transition: transform 0.2s linear;
+}
+
+.fa-sun {
+    color: rgb(236, 137, 39);
+}
+
+.fa-moon {
+    color: var(--white);
 }
 
 .menu__nav--mobile {
@@ -120,7 +150,7 @@ main {
     width: 100%;
     object-fit: none;
     object-position: 50% 50%;
-    z-index: -2;
+    z-index: -1;
 }
 
 #main__video--desktop {
@@ -134,7 +164,7 @@ main {
     background: rgba(0, 0, 0, 0.5);
     width: 100%;
     padding: 10px;
-    z-index: -1;
+    z-index: 0;
 }
 
 .main__title__container h2 {
@@ -148,12 +178,13 @@ main {
 }
 
 .main__pause__button {
-    background-color: var(--black);
-    color: var(--white);
+    background-color: var(--pause-button);
+    color: var(--title-color);
+    border: none;
     font-size: 1rem;
     font-weight: 600;
     border-style: transparent;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 10px 15px;
     margin: 10px 0px 5px 0px;
     transition: .5s;
@@ -201,8 +232,9 @@ main {
         display: flex;
         flex-direction: row;
         align-items: center;
+        cursor: pointer;
         border: none;
-        padding: 0px 20px;
+        padding: 0px 15px;
         height: 80px;
         color: var(--white);
         background-color: var(--black);
@@ -222,6 +254,7 @@ main {
     }
 
     .menu__user__button {
+        cursor: pointer;
         height: 80px;
         padding: 0px 20px;
         border-style: none;
