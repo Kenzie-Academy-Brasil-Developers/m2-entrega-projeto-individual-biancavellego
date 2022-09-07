@@ -4,44 +4,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./src/img/icons/" type="image/x-icon">
+    <link rel="shortcut icon" href="../../img/icons/LogoMakr-3bWhNU.png" type="image/x-icon">
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="./index.css">
     <script type="module" defer src="./index.js"></script>
     <title>Kenzie Enterprises</title>
 </head>
 <body>
-    <video autoplay muted loop id="main__background__video">
-        <source src="../../videos/Traffic - 81940.mp4" type="video/mp4">
-    </video>
-    <header class="menu__container">
-        <div class="menu__logo">
-            <img src="../../img/icons/" alt="Logo">
+<!----------------------------------------------------MOBILE VERSION----------------------------------------------------------------------->
+    <header class="menu__container--mobile">
+        <div class="menu__logo__container">
+            <img class="menu__logo" src="../../img/icons/LogoMakr-3bWhNU.png" alt="Logo">
+            <h1>Kenzie Enterprises</h1>
         </div>
-        <nav class="menu__nav__bar">
-            <ul>
+        <nav class="menu__nav--mobile">
+            <span id="mode__button">Light Mode</span>
+            <button type="button" class="menu__button--mobile" type="button">Menu<img src="../../img/icons/Drag.svg" alt="Menu icon"></button>
+            <div class="menu__button__container--mobile">
+                <button type="button">All Companies<img src="../../img/icons/Grid - Small.svg" alt=""></button>
+                <button type="button">By Sector<img src="../../img/icons/Grid - Small.svg" alt=""></button>
+                <button type="button">Login<img src="../../img/icons/Grid - Small.svg" alt=""></button>
+                <button type="button">Sign Up<img src="../../img/icons/Grid - Small.svg" alt=""></button>
+            </div>
+        </nav>
+    </header>
+<!----------------------------------------------------DESKTOP VERSION---------------------------------------------------------------------->
+    <header class="menu__container--desktop">
+        <div class="menu__logo__container">
+            <img class="menu__logo" src="../../img/icons/LogoMakr-3bWhNU.png" alt="Logo">
+            <h1>Kenzie Enterprises</h1>
+        </div>
+        <nav class="menu__nav--desktop">
+            <span id="mode__button">Light Mode</span>
+            <ul class="menu__nav__options">
                 <li>
-                    <a href="http//">All Companies</a>
+                    <button class="menu__button--desktop" type="button">All Companies<img class="menu__nav__icon" src="../../img/icons/Drag.svg" alt="Menu icon"></button>
                 </li>
                 <li>
-                    <a href="http//">By Sector</a>
+                    <button class="menu__button--desktop" type="button">By Sector<img class="menu__nav__icon" src="../../img/icons/Drag.svg" alt="Menu icon"></button>
                 </li>
                 <li>
-                    <a href="http//">Sign Up</a>
+                    <button class="menu__button--desktop" type="button">Sign Up<img class="menu__nav__icon" src="../../img/icons/Drag.svg" alt="Menu icon"></button>
                 </li>
                 <li>
-                    <a href="http//">Login</a>
+                    <button class="menu__button--desktop" type="button">Login<img class="menu__nav__icon" src="../../img/icons/Drag.svg" alt="Menu icon"></button>
+                </li>
+                <li>
+                    <button class="menu__user__button" type="button">
+                        <img src="../../img/icons/account_circle_white_36dp.svg" alt="User Image">
+                    </button>
                 </li>
             </ul>
         </nav>
-        <div class="menu__container__user__image">
-            <img src="./src/img/" alt="Standard User Image">
-        </div>
     </header>
     <main>
+        <video autoplay muted loop id="main__video--mobile">
+            <source src="../../videos/Bridge - 64985.mp4" type="video/mp4">
+        </video>
+        <video autoplay muted loop id="main__video--desktop">
+            <source src="../../videos/New York - 30978.mp4" type="video/mp4">
+        </video>
         <div class="main__title__container">
-            <h1>Welcome</h1>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus aut et similique, modi, iste eum debitis veniam odit cum nulla reiciendis? Odio porro expedita voluptate consequatur odit quasi et tempore!</p>
+            <h2>Welcome</h2>
+            <p>Start managing your company like easy pickings today!</p>
+            <div class="main__button__container">
+                <button class="main__pause__button" type="button">Pause video</button>
+            </div>
         </div>
     </main>
 </body>

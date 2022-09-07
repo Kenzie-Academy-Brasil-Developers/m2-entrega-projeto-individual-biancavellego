@@ -4,12 +4,17 @@
 */
 
 :root {
-
-	
-
+	--black: rgb(12, 12, 12);
+	--white: rgb(242, 232, 232);
+	--menu-color: rgb(248, 248, 240);
+	--title-color: rgb(12, 12, 12);
+	--grey: rgb(80, 77, 77);
 }
 
-
+.dark__mode:root {
+	--menu-color: rgb(42, 42, 41);
+	--title-color: rgb(208, 208, 206);
+}
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -24,6 +29,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
+	font-family: Arial, Helvetica, sans-serif;
 	margin: 0;
 	padding: 0;
 	border: 0;
