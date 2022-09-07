@@ -283,3 +283,116 @@ main {
         z-index: -2;
     }
 }
+
+/*****************************************************************************************************************************************/
+/******************************************************LOGIN MODAL INTERFACE**************************************************************/
+/*****************************************************************************************************************************************/
+.form__container {
+    margin: 0 auto;
+    color: var(--white);
+    background-color: var(--black);
+    border-radius: 20px;
+    width: 80%;
+    box-shadow: 5px 5px 10px var(--black);
+    max-width: 400px;
+}
+
+.form__login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .5rem;
+}
+
+.form__title__container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    margin: 10px 0px;
+}
+
+.form__login h1 {
+    color: var(--white);
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    width: 100%;
+    margin-left: 15px;
+    margin-top: 30px;
+}
+
+.fa-solid {
+    cursor: pointer;
+    transform: scale(1.5);
+    margin-right: 15px;
+}
+
+.form__login__container {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: .1rem;
+}
+
+label {
+    color: var(--white);
+    font-size: .8rem;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.form__login__container input {
+    border-radius: 10px;
+    border-style: none;
+    border: none;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: .8rem;
+}
+
+.form__button {
+    cursor: pointer;
+    color: var(--black);
+    background-color: var(--white);
+    font-size: .7rem;
+    font-weight: 700;
+    padding: 5px;
+    border-radius: 10px;
+    border-color: transparent;
+    margin-top: 50px;
+    transition: .5s;
+    width: 50%;
+    align-self: center;
+}
+
+.form__button:hover {
+    filter: invert(100%);
+    transition: .5s;
+}
+
+.form__login__container p {
+    font-size: .7rem;
+    align-self: center;
+    margin: 15px 0px;
+}
+
+.form__handle {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--white);
+}
+/*****************************************************************************************************************************************/
+/******************************************************SIGN UP MODAL INTERFACE************************************************************/
+/*****************************************************************************************************************************************/
+.form__register__container {
+    width: 100%;
+}
+
+.form__register__profLevel__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 10px;
+}

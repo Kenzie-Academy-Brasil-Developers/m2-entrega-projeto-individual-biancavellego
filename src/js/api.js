@@ -1,27 +1,32 @@
 export class Api {
 
     static ulrBase = "http://localhost:6278/";
+    static token   = localStorage.getItem("@kenzieEnterprises:token");
+    static headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${this.token}`
+    };
 
     static async login(data) {
     
         const response = await fetch(`${this.ulrBase}auth/login`, {
                                     method: "POST",
-                                    headers: {"Content-Type": "application/json"},
+                                    headers: this.headers,
                                     body: JSON.stringify(data)
-                            })
-                            .then(resp => resp.json())
-                            .then(resp => {
-                                console.log(resp)
-                                localStorage.setItem("@blogKenzie:token", resp.token);
-                                localStorage.setItem("@blogKenzie:userID", resp.userId);
-                                window.location.assign("../pages/dashboard.html");
+                                })
+                                .then(resp => resp.json())
+                                .then(resp => {
+                                    console.log(resp)
+                                    localStorage.setItem("@kenzieEnterprises:token", resp.token);
+                                    localStorage.setItem("@kenzieEnterprises:userID", resp.userId);
+                                    window.location.assign("../pages/dashboard.html");
 
-                                return resp;
-                            })
-                            .catch(err => {
-                                console.log(err);
-                                console.log(err.message);
-                            });
+                                    return resp;
+                                })
+                                    .catch(err => {
+                                    console.log(err);
+                                    console.log(err.message);
+                                });
 
         return response;
 
@@ -31,14 +36,14 @@ export class Api {
 
         const response = await fetch(`${this.urlBase}register/user`, {
                                     method: "POST",
-                                    headers: {"Content-Type": "application/json"},
+                                    headers: this.headers,
                                     body: JSON.stringify(data)
-                            })
-                            .then(resp => resp.json())
-                            .then(resp => {
-                                console.log(resp)
-                            })
-                            .catch(err => console.log(err));
+                                })
+                                .then(resp => resp.json())
+                                .then(resp => {
+                                    console.log(resp)
+                                })
+                                .catch(err => console.log(err));
 
         return response;
 
@@ -48,20 +53,17 @@ export class Api {
         
         const response = await fetch(`${this.ulrBase}companies`, {
                                     method: "GET",
-                                    headers: {
-                                        "Content-Type": "application/json",
-                                        Authorization: `Bearer null` 
-                                    },
-                            })
-                            .then(resp => resp.json())
-                            .then(resp => console.log(resp))
-                            .catch(err => console.log(err));
+                                    headers: this.headers
+                                })
+                                .then(resp => resp.json())
+                                .then(resp => console.log(resp))
+                                .catch(err => console.log(err));
 
         return response;
         
     }
 
-    static listCompaniesBySector() {
+    static async listCompaniesBySector() {
     
 
     
@@ -69,89 +71,88 @@ export class Api {
 
 
     //LOGGED USERS:
-    static listAllSectorEmployees() {
+    static async listAllSectorEmployees() {
     
     
     
     }
 
-    static listEmployeeDepartment() {
+    static async listEmployeeDepartment() {
     
     
     
     }
 
-    static updateEmployeeData() {
+    static async updateEmployeeData() {
     
     
     
     }
 
     //ADMIN:
-    static listAllEmployees() {
+    static async listAllEmployees() {
     
         
 
     }
 
-    static noDepartmentUsers() {
+    static async noDepartmentUsers() {
     
         
     
     }
 
-    static updateEmployeeDataAdmin() {
+    static async updateEmployeeDataAdmin() {
     
         
     
     }
 
-    static subscribeCompany() {
+    static async subscribeCompany() {
     
 
     
     }
 
-    static listAllSectors() {
+    static async listAllSectors() {
     
         
         
     }
 
-    static listAllDepartments() {
+    static async listAllDepartments() {
     
         
     
     }
 
-    static listAllCompaniesDepartments() {
+    static async listAllCompaniesDepartments() {
         
 
     
     }
 
-    static createDepartment() {
+    static async createDepartment() {
     
     
 
     }
 
-    static hireEmployee() {
+    static async hireEmployee() {
     
         
 
     }
 
-    static fireEmployee() {
+    static async fireEmployee() {
     
         
     
     }
 
-    static deleteDepartment() {
+    static async deleteDepartment() {
     
     
     
     }
-
 }

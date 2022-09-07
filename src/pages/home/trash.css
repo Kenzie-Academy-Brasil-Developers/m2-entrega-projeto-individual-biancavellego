@@ -92,3 +92,16 @@ main {
 .menu__options__last--mobile {
     border-radius: 0px 0px 10px 10px;
 }
+
+
+#dark__toggle::after {
+    display: block;
+    content: '';
+   width: 70px;
+   height: 6px;
+   background: var(--black);
+   position: absolute;
+   bottom: -27px;
+   left: -13px;
+   cursor: none;
+}
