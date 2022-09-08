@@ -50,7 +50,7 @@ export class HomePage {
         const inputEmail       = document.querySelector("#form__email__login");
         const inputPassword    = document.querySelector("#form__password__login");
         const loginButtonModal = document.querySelector(".form__button");
-        const loginRedirect    = document.querySelector(".form__handle");
+        const loginRedirect    = document.querySelectorAll(".form__handle");
 
         loginButtonModal.addEventListener("click", () => {
         
@@ -63,11 +63,14 @@ export class HomePage {
         
         });
 
-        loginRedirect.addEventListener("click", () => {
+        loginRedirect.forEach(element => {
         
-            Modal.signUpForm();
-
-        });
+            element.addEventListener("click", () => {
+        
+                Modal.signUpForm();
+    
+            });
+        }); 
     }
 
     static handleSignUpModal() {
