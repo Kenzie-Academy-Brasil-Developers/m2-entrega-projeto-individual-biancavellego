@@ -303,7 +303,7 @@ main {
     max-width: 400px;
 }
 
-.form__login {
+.form__modal {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -318,7 +318,7 @@ main {
     margin: 10px 0px;
 }
 
-.form__login h1 {
+.form__modal h1 {
     color: var(--white);
     text-align: center;
     font-size: 2rem;
@@ -334,7 +334,7 @@ main {
     margin-right: 15px;
 }
 
-.form__login__container {
+.form__modal__container {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -348,7 +348,7 @@ label {
     margin-top: 20px;
 }
 
-.form__login__container input {
+.form__modal__container input {
     border-radius: 10px;
     border-style: none;
     border: none;
@@ -377,7 +377,7 @@ label {
     transition: .5s;
 }
 
-.form__login__container p {
+.form__modal__container p {
     font-size: .7rem;
     align-self: center;
     margin: 15px 0px;
@@ -395,10 +395,16 @@ label {
     width: 100%;
 }
 
-.form__register__profLevel__container {
+.form__register__proLevel__container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     margin-left: 10px;
+}
+
+.form__error__message {
+    font-weight: 700;
+    font-size: .8rem;
+    color: red;
 }

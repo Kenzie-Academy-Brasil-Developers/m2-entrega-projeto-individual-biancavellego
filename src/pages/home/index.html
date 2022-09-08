@@ -89,12 +89,12 @@
     </main>
 <!--------------------------------------------------------------LOGIN MODAL----------------------------------------------------------------->
     <section class="form__container">
-        <form class="form__login">
+        <form class="form__modal">
             <div class="form__title__container">
                 <h1>Employee Login</h1>
                 <i class="fa-solid fa-xmark"></i>
             </div>
-            <div class="form__login__container">
+            <div class="form__modal__container">
                 <label  for="email">Email:</label>
                 <input  type="text" name="email" id="form__email__login" placeholder="Type your email here...">
                 <label  for="password">Password:</label>
@@ -106,32 +106,35 @@
     </section>
 <!--------------------------------------------------------------SIGN UP MODAL--------------------------------------------------------------->
     <section class="form__container">
-        <form class="form__login">
+        <form class="form__modal">
             <div class="form__title__container">
                 <h1>Register</h1>
                 <i class="fa-solid fa-xmark"></i>
             </div>
-            <div class="form__login__container">
-                <label  for="email">Email:</label>
-                <input  type="text" name="email" id="form__email__signup__input" placeholder="Add your email here...">
+            <div class="form__modal__container">
+                <label for="username">Username</label>
+                <input type="text" title="Username" id="form__username__signup" placeholder="Create username...">
+                <label for="email">Email:</label>
+                <input type="text" title="E-mail" name="email" id="form__email__signup__input" placeholder="Add your email here...">
                 <label  for="password">Create password:</label>
-                <input  type="password" name="password" id="form__password__signup" placeholder="Create password here...">
+                <input  type="password" title="Password" name="password" id="form__password__signup" placeholder="Create password here...">
                 <label  for="password">Confirm password:</label>
-                <input  type="password" name="password" id="form__password__signup__confirm" placeholder="Confirm password...">
+                <input  type="password" title="Password Confirmation" name="password" id="form__password__signup__confirm" placeholder="Confirm password...">
                 <label>Select your professional level:</label>
                 <div class="form__register__container">
-                    <div class="form__register__profLevel__container">
+                    <div class="form__register__proLevel__container">
                         <label for="Junior">Junior</label>
-                        <input type="radio" id="junior" title="professional_level" name="professional_level" value="Junior">
+                        <input type="radio" id="junior" title="Professional level" name="professional_level" value="Junior">
                     </div>
-                    <div class="form__register__profLevel__container">
+                    <div class="form__register__proLevel__container">
                         <label for="Mid-Level">Mid-Level</label>
-                        <input type="radio" id="mid-level" title="professional_level" name="professional_level" value="Mid-Level">
+                        <input type="radio" id="mid-level" title="Professional level" name="professional_level" value="Mid-Level">
                     </div>
-                    <div class="form__register__profLevel__container">
+                    <div class="form__register__proLevel__container">
                         <label for="Senior">Senior</label>
-                        <input type="radio" id="senior" title="professional_level" name="professional_level" value="Senior">
+                        <input type="radio" id="senior" title="Professional level" name="professional_level" value="Senior">
                     </div>
+                    <span class="form__error__message"></span>
                 </div>
                 <button class="form__button" type="button">Register account</button>
                 <p>Already a user? Login with your account <span class="form__handle">here!</span>
