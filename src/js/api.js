@@ -18,7 +18,7 @@ export class Api {
                                 .then(resp => {
                                     console.log(resp)
                                     localStorage.setItem("@kenzieEnterprises:token", resp.token);
-                                    localStorage.setItem("@kenzieEnterprises:userID", resp.userId);
+                                    localStorage.setItem("@kenzieEnterprises:User_id", resp.uuid);
                                     window.location.assign("../pages/dashboard.html");
 
                                     return resp;
