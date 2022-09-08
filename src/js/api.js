@@ -21,7 +21,7 @@ export class Api {
                                     console.log(resp)
                                     localStorage.setItem("@kenzieEnterprises:token", resp.token);
                                     localStorage.setItem("@kenzieEnterprises:User_id", resp.uuid);
-                                    window.location.assign("../pages/dashboard.html");
+                                    //window.location.assign("../dashboard/dashboard.html");
 
                                     return resp;
                                 })

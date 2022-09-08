@@ -33,19 +33,19 @@ export class HomePage {
     static handleLoginModal() {
     
         const loginButtonMenu = document.querySelector(".login__button");
-        const token       = localStorage.getItem("@kenzieEnterprises:token");
+        const token           = localStorage.getItem("@kenzieEnterprises:token");
+
+        if(token === true && token.value !== undefined) {
+        
+            window.location.assign("../dashboard/dashboard.html");
+        
+        }
 
         loginButtonMenu.addEventListener("click", () => {
         
             const newLoginModal = Modal.loginForm();
 
         });
-
-        if(token) {
-        
-            //window.location.assign("../dashboard/dashboard.html");
-        
-        }
 
         const inputEmail       = document.querySelector("#form__email__login");
         const inputPassword    = document.querySelector("#form__password__login");
@@ -84,7 +84,7 @@ export class HomePage {
         const errorMessage         = document.querySelector(".form__error__message");
         let proLevelSelected;
 
-        registerButton.addEventListener("click", () => {
+        registerButton.addEventListener("click", async () => {
         
             if(inputPassword.innerText !== confirmedPassword.innerText) {
         
@@ -117,7 +117,7 @@ export class HomePage {
                 "username": inputUsername.value
             }
 
-            Api.createUser(data);
+            await Api.createUser(data);
 
         });
 

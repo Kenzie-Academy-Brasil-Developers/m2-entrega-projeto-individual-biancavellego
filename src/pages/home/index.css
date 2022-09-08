@@ -373,7 +373,7 @@ label {
 }
 
 .form__button:hover {
-    filter: invert(100%);
+    filter: invert(90%);
     transition: .5s;
 }
 
