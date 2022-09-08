@@ -52,7 +52,7 @@ h1 {
     cursor: pointer;
     padding: 5px;
     width: 40px;
-    margin: 0px 5px;
+    margin: 0px 15px 0px 0px;
 }
 
 #dark__toggle .ball {
@@ -160,13 +160,14 @@ main {
 }
 
 .main__title__container {
-    position: fixed;
+    position: -webkit-sticky;
+    position:sticky;
     bottom: 0;
     color: var(--white);
     background: rgba(0, 0, 0, 0.5);
-    width: 100%;
+    margin-top: -250px;
+    max-width: 100%;
     padding: 10px;
-    z-index: 0;
 }
 
 .main__title__container h2 {
@@ -196,6 +197,29 @@ main {
     cursor: pointer;
     transition: .5s;
     filter: invert(100%);
+}
+
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .5rem;
+    width: 100%;
+    height: 200px;
+    color: var(--white);
+    background-color: var(--black);
+    font-size: .7rem;
+    font-weight: 300;
+}
+
+footer i {
+    margin: 20px;
+    transform: scale(2.5);
+}
+
+footer p {
+    padding: 10px
 }
 
 .hidden {
@@ -240,7 +264,7 @@ main {
         align-items: center;
         cursor: pointer;
         border: none;
-        padding: 0px 15px;
+        padding: 0px 0px 0px 10px;
         height: 80px;
         color: var(--white);
         background-color: var(--black);
@@ -253,10 +277,10 @@ main {
         filter: invert(100%);
     }
 
-    .menu__button--desktop img {
-        margin: 0px 5px;
+    .menu__nav__icon {
+        margin: 0px 10px;
         width: 30px;
-        filter: invert(100%);
+        filter: invert(50%)
     }
 
     .menu__user__button {
@@ -294,13 +318,21 @@ main {
 /******************************************************LOGIN MODAL INTERFACE**************************************************************/
 /*****************************************************************************************************************************************/
 .form__container {
-    margin: 0 auto;
+    position: absolute;
+    top: 100px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
     color: var(--white);
     background-color: var(--black);
     border-radius: 20px;
     width: 80%;
+    height: -moz-fit-content;
+    height: fit-content;
     box-shadow: 5px 5px 10px var(--black);
     max-width: 400px;
+    z-index: 2000;
 }
 
 .form__modal {
@@ -369,6 +401,7 @@ label {
     margin-top: 50px;
     transition: .5s;
     width: 50%;
+    min-width: 105px;
     align-self: center;
 }
 

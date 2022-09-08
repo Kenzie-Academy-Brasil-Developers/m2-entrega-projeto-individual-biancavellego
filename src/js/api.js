@@ -43,7 +43,7 @@ export class Api {
                                 })
                                 .then(resp => resp.json())
                                 .then(resp => {
-                                    Modal.loginForm();
+                                    //Modal.loginForm()
                                     console.log(resp)
                                 })
                                 .catch(err => console.log(err));
