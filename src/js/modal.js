@@ -175,6 +175,7 @@ export class Modal {
                 const sectionLogin  = Modal.loginForm();
                 main.append(sectionLogin);
                 Modal.closeModal();
+                Modal.handleLoginModal();
                 Modal.redirect();
 
                 const mainSection  = document.querySelectorAll("section");
@@ -187,9 +188,6 @@ export class Modal {
                     
                     });
                 }
-
-                //Modal.handleLoginModal();
-
             });
         });
     }
@@ -206,6 +204,7 @@ export class Modal {
                 const sectionSignUp = Modal.signUpForm();
                 main.append(sectionSignUp);
                 Modal.closeModal();
+                Modal.handleSignUpModal();
                 Modal.redirect();
 
                 const mainSection  = document.querySelectorAll("section");
@@ -218,9 +217,6 @@ export class Modal {
                     
                     });
                 }
-
-                //Modal.handleSignUpModal();
-
             });
         });
     }
@@ -260,7 +256,13 @@ export class Modal {
 
         xFactor.addEventListener("click", () => {
         
+            modal.classList.add("disappearAnimation");
+
+            setTimeout(()=> {
+                
                 modal.remove();
+            
+            }, 1000);
         });
     }
 
@@ -268,9 +270,9 @@ export class Modal {
 
         const token = localStorage.getItem("@kenzieEnterprises:token");
 
-        if(token === true && token.value !== undefined) {
+        if(token) {
         
-            window.location.assign("../dashboard/dashboard.html");
+            window.location.replace("../dashboard/dashboard.html");
         
         }
 
@@ -278,18 +280,16 @@ export class Modal {
         const inputPassword    = document.querySelector("#form__password__login");
         const loginButtonModal = document.querySelector(".form__button");
 
-        // loginButtonModal.addEventListener("click", async () => {
+        loginButtonModal.addEventListener("click", async () => {
         
-        //     const data = {
-        //         email: inputEmail.value,
-        //         password: inputPassword.value,
-        //     }
+            const data = {
+                email: inputEmail.value,
+                password: inputPassword.value,
+            }
 
-        //     await Api.login(data);
+            await Api.login(data);
         
-        // });
-
-      
+        });
     }
 
     static handleSignUpModal() {
@@ -305,44 +305,42 @@ export class Modal {
         const errorMessage         = document.querySelector(".form__error__message");
         let   proLevelSelected;
 
-        // registerButton.addEventListener("click", async () => {
+        registerButton.addEventListener("click", async () => {
         
-        //     if(inputPassword.innerText !== confirmedPassword.innerText) {
+            if(inputPassword.innerText !== confirmedPassword.innerText) {
         
-        //         errorMessage.innerText = "Passwords do not match. Please, type again your password."
+                errorMessage.innerText = "Passwords do not match. Please, type again your password."
             
-        //     }
+            }
 
-        //     if(inputJunior.checked) {
+            if(inputJunior.checked) {
                 
-        //         proLevelSelected = "júnior";
+                proLevelSelected = "júnior";
 
-        //     }else if(inputMidLevel.checked) {
+            }else if(inputMidLevel.checked) {
                 
-        //         proLevelSelected = "pleno";
+                proLevelSelected = "pleno";
             
-        //     }else if(inputSenior.checked) {
+            }else if(inputSenior.checked) {
             
-        //         proLevelSelected = "sênior";
+                proLevelSelected = "sênior";
             
-        //     } else {
+            } else {
             
-        //         errorMessage.innerText = "Please, select a professional level.";
+                errorMessage.innerText = "Please, select a professional level.";
             
-        //     }
+            }
 
-        //     const data = {
-        //         "password": confirmedPassword.value,
-        //         "email": inputEmail.value,
-        //         "professional_level": proLevelSelected,
-        //         "username": inputUsername.value
-        //     }
+            const data = {
+                "password": confirmedPassword.value,
+                "email": inputEmail.value,
+                "professional_level": proLevelSelected,
+                "username": inputUsername.value
+            }
 
-        //     await Api.createUser(data);
+            await Api.createUser(data);
 
-        // });
-
- 
+        });
 
     }
 

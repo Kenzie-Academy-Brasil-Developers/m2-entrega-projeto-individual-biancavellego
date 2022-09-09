@@ -1,4 +1,5 @@
 import { Modal } from "./modal.js";
+import { Toast } from "./toast.js";
 
 export class Api {
 
@@ -18,16 +19,30 @@ export class Api {
                                 })
                                 .then(resp => resp.json())
                                 .then(resp => {
-                                    console.log(resp)
-                                    localStorage.setItem("@kenzieEnterprises:token", resp.token);
-                                    localStorage.setItem("@kenzieEnterprises:User_id", resp.uuid);
-                                    //window.location.assign("../dashboard/dashboard.html");
 
-                                    return resp;
+                                    console.log(resp);
+
+                                    if(resp.ok) {
+
+                                        localStorage.setItem("@kenzieEnterprises:token", resp.token);
+                                        localStorage.setItem("@kenzieEnterprises:User_id", resp.uuid);
+                                        Toast.create("Success! You are now logged in.", "linear-gradient(to right, #00b09b, #96c93d)");
+                            
+                                        setTimeout(() => {
+                                        
+                                            window.location.replace("../dashboard/dashboard.html");
+                                        
+                                        }, 2000);
+                                    }
+
+                                    Toast.create(resp.error, "red");
+
                                 })
-                                    .catch(err => {
+                                .catch(err => {
+
                                     console.log(err);
                                     console.log(err.message);
+
                                 });
 
         return response;
@@ -43,8 +58,10 @@ export class Api {
                                 })
                                 .then(resp => resp.json())
                                 .then(resp => {
-                                    Modal.loginForm()
-                                    console.log(resp)
+
+                                    console.log(resp);
+                                    Modal.loginForm();
+
                                 })
                                 .catch(err => console.log(err));
 
