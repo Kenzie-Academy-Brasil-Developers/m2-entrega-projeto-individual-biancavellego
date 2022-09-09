@@ -29,54 +29,12 @@ export class HomePage {
         
         });
     }
-
-    static handleLoginModal() {
-    
-        const loginButtonMenu = document.querySelector(".login__button");
-        const token           = localStorage.getItem("@kenzieEnterprises:token");
-
-        if(token === true && token.value !== undefined) {
-        
-            window.location.assign("../dashboard/dashboard.html");
-        
-        }
-
-        loginButtonMenu.addEventListener("click", () => {
-        
-            const newLoginModal = Modal.showModal();
-
-        });
-
-        const inputEmail       = document.querySelector("#form__email__login");
-        const inputPassword    = document.querySelector("#form__password__login");
-        const loginButtonModal = document.querySelector(".form__button");
-        const loginRedirect    = document.querySelectorAll(".form__handle");
-
-        loginButtonModal.addEventListener("click", () => {
-        
-            const data = {
-                email: inputEmail.value,
-                password: inputPassword.value,
-            }
-
-            Api.login(data);
-        
-        });
-
-        loginRedirect.forEach(element => {
-        
-            element.addEventListener("click", () => {
-        
-                Modal.showModal();
-    
-            });
-        }); 
-    }
-
 }
 
 HomePage.handleDarkMode();
 HomePage.handleMobileMenu();
-HomePage.handleLoginModal();
-Modal.handleSignUpModal();
+// Modal.loginForm();
+// Modal.signUpForm();
+Modal.showLoginModal();
+Modal.showSignUpModal();
 Modal.closeModal();
