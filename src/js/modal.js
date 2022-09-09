@@ -17,7 +17,7 @@ export class Modal {
         const button         = document.createElement("button");
         const tagP = `<p>Not a user yet? <span class="form__handle">Create an account</span> and <span class="form__handle">join us</span> today</p>`;
         
-        sectionLogin.classList.add("form__container", "form__login", "hidden");
+        sectionLogin.classList.add("form__container", "form__login");
         form.classList.add("form__modal");
         divTitle.classList.add("form__title__container");
         tagFontAwesome.classList.add("fa-solid", "fa-xmark");
@@ -25,6 +25,16 @@ export class Modal {
         inputEmail.setAttribute("id", "form__email__login");
         inputPassword.setAttribute("id", "form__password__login");
         button.classList.add("form__button");
+
+        labelEmail.setAttribute("for", "email");
+        inputEmail.setAttribute("type", "text");
+        inputEmail.setAttribute("title", "E-mail");
+        inputEmail.setAttribute("name", "email");
+        labelPassword.setAttribute("for", "email");
+        inputPassword.setAttribute("type", "password");
+        inputPassword.setAttribute("title", "Password");
+        inputPassword.setAttribute("name", "password");
+        button.setAttribute("type", "button");
 
         tagH1.innerText           = "Employee Login";
         labelEmail.innerText      = "Email:";
@@ -39,7 +49,6 @@ export class Modal {
         form.append(divTitle, divInput);
         sectionLogin.append(form);
 
-        console.log(sectionLogin);
         return sectionLogin;
     
     }
@@ -73,9 +82,9 @@ export class Modal {
         const inputSenior          = document.createElement("input");
         const spanErrorMessage     = document.createElement("span");
         const registerButton       = document.createElement("button");
-        const tagP                 = `Already a user? Login with your account <span class="form__handle">here!</span>`;
+        const tagP                 = `<p>Already a user? Login with your account <span class="form__handle">here!</span></p>`;
 
-        sectionSignUp.classList.add("form__container", "form__signUp", "hidden");
+        sectionSignUp.classList.add("form__container", "form__signUp");
         form.classList.add("form__modal");
         divTitle.classList.add("form__title__container");
         tagFontAwesome.classList.add("fa-solid", "fa-xmark");
@@ -85,14 +94,44 @@ export class Modal {
         inputCreatePassword.setAttribute("id", "form__password__signup");
         inputConfirmPassword.setAttribute("id", "form__password__signup__confirm");
         divRegisterContainer.classList.add("form__register__container");
-        divInputContainer1.setAttribute("id", "form__register__proLevel__container");
-        inputJunior.classList.add("junior");
-        divInputContainer2.setAttribute("id", "form__register__proLevel__container");
-        inputMid.classList.add("mid-level");
-        divInputContainer3.setAttribute("id", "form__register__proLevel__container");
-        inputSenior.classList.add("senior");
+        divInputContainer1.classList.add("form__register__proLevel__container");
+        inputJunior.setAttribute("id", "junior");
+        divInputContainer2.classList.add("form__register__proLevel__container");
+        inputMid.setAttribute("id", "mid-level");
+        divInputContainer3.classList.add("form__register__proLevel__container");
+        inputSenior.setAttribute("id", "senior");
         spanErrorMessage.classList.add("form__error__message");
         registerButton.classList.add("form__button");
+
+        labelUsername.setAttribute("for", "username");
+        inputUsername.setAttribute("type", "text");
+        inputUsername.setAttribute("title", "Username");
+        labelEmail.setAttribute("for", "email");
+        inputEmail.setAttribute("type", "text");
+        inputEmail.setAttribute("title", "E-mail");
+        labelCreatePassword.setAttribute("for", "text");
+        inputCreatePassword.setAttribute("type", "text");
+        inputCreatePassword.setAttribute("title", "Password");
+        labelConfirmPassword.setAttribute("for", "text");
+        inputConfirmPassword.setAttribute("type", "text");
+        inputConfirmPassword.setAttribute("title", "Password Confirmation");
+        labelProLevel.setAttribute("for", "text");
+        labelJunior.setAttribute("for", "text");
+        inputJunior.setAttribute("type", "radio");
+        inputJunior.setAttribute("title", "Professional level");
+        inputJunior.setAttribute("name", "professional_level");
+        inputJunior.setAttribute("value", "Junior");
+        labelMid.setAttribute("for", "text");
+        inputMid.setAttribute("type", "radio");
+        inputMid.setAttribute("title", "Professional level");
+        inputMid.setAttribute("name", "professional_level");
+        inputMid.setAttribute("value", "Mid-Level");
+        labelSenior.setAttribute("for", "text");
+        inputSenior.setAttribute("type", "radio");
+        inputSenior.setAttribute("title", "Professional level");
+        inputSenior.setAttribute("name", "professional_level");
+        inputSenior.setAttribute("value", "Senior");
+        registerButton.setAttribute("type", "button");
         
         tagH1.innerText                  = "Register";
         labelUsername.innerText          = "Username";
@@ -120,9 +159,109 @@ export class Modal {
         form.append(divTitle, divInput);
         sectionSignUp.append(form);
 
-        console.log(sectionSignUp);
         return sectionSignUp;
 
+    }
+
+    static showLoginModal() {
+    
+        const main         = document.querySelector("main");
+        const loginButton  = document.querySelectorAll(".login__button");
+        
+        loginButton.forEach(element => {
+        
+            element.addEventListener("click", () => {
+            
+                const sectionLogin  = Modal.loginForm();
+                main.append(sectionLogin);
+                Modal.closeModal();
+                Modal.redirect();
+
+                const mainSection  = document.querySelectorAll("section");
+
+                if(mainSection.length > 1) {
+                
+                    mainSection.forEach(elem => {
+                    
+                        elem.remove();
+                    
+                    });
+                }
+
+                //Modal.handleLoginModal();
+
+            });
+        });
+    }
+
+    static showSignUpModal() {
+        
+        const main         = document.querySelector("main");
+        const signUpButton = document.querySelectorAll(".signUp__button");
+    
+        signUpButton.forEach(element => {
+            
+            element.addEventListener("click", () => {
+                
+                const sectionSignUp = Modal.signUpForm();
+                main.append(sectionSignUp);
+                Modal.closeModal();
+                Modal.redirect();
+
+                const mainSection  = document.querySelectorAll("section");
+
+                if(mainSection.length > 1) {
+                
+                    mainSection.forEach(elem => {
+                    
+                        elem.remove();
+                    
+                    });
+                }
+
+                //Modal.handleSignUpModal();
+
+            });
+        });
+    }
+
+    static redirect() {
+
+        const main     = document.querySelector("main");
+        const redirect = document.querySelectorAll(".form__handle");
+
+        redirect.forEach(element => {
+
+            element.addEventListener("click", () => {
+            
+                console.log(element.closest("section").className);
+
+                if(element.closest("section").className.includes("form__login")) {
+            
+                    const sectionSignUp = Modal.signUpForm();
+                    main.append(sectionSignUp);
+                    Modal.closeModal();
+                
+                }else if(element.closest("section").className.includes("form__signUp")) {
+                
+                    const sectionLogin  = Modal.loginForm();
+                    main.append(sectionLogin);
+                    Modal.closeModal();
+                
+                }
+            });
+        });
+    }
+
+    static closeModal() {
+    
+        const xFactor = document.querySelector(".fa-xmark");
+        const modal   = document.querySelector(".form__container");
+
+        xFactor.addEventListener("click", () => {
+        
+                modal.remove();
+        });
     }
 
     static handleLoginModal() {
@@ -138,7 +277,6 @@ export class Modal {
         const inputEmail       = document.querySelector("#form__email__login");
         const inputPassword    = document.querySelector("#form__password__login");
         const loginButtonModal = document.querySelector(".form__button");
-        const loginRedirect    = document.querySelectorAll(".form__handle");
 
         // loginButtonModal.addEventListener("click", async () => {
         
@@ -151,15 +289,7 @@ export class Modal {
         
         // });
 
-        // loginRedirect.forEach(element => {
-        
-        //     element.addEventListener("click", () => {
-        
-        //         Modal.loginForm().remove();
-        //         Modal.signUpForm();
-    
-        //     });
-        // }); 
+      
     }
 
     static handleSignUpModal() {
@@ -172,7 +302,6 @@ export class Modal {
         const inputMidLevel        = document.querySelector("#mid-level");
         const inputSenior          = document.querySelector("#senior");
         const registerButton       = document.querySelector(".form__button");
-        const signUpRedirect       = document.querySelector(".form__handle");
         const errorMessage         = document.querySelector(".form__error__message");
         let   proLevelSelected;
 
@@ -213,61 +342,9 @@ export class Modal {
 
         // });
 
-        // signUpRedirect.addEventListener("click", () => {
-        
-        //     Modal.signUpForm().remove();
-        //     Modal.loginForm();
-        
-        // });
+ 
+
     }
 
-    static showLoginModal() {
     
-        const loginButton  = document.querySelectorAll(".login__button");
-        
-        loginButton.forEach(element => {
-        
-            element.addEventListener("click", () => {
-            
-                //Modal.signUpForm().remove();
-                Modal.loginForm();
-                Modal.handleLoginModal();
-            
-            });
-        });
-    }
-
-    static showSignUpModal() {
-        
-        const signUpButton = document.querySelectorAll(".signUp__button");
-    
-        signUpButton.forEach(element => {
-            
-            element.addEventListener("click", () => {
-                
-                //Modal.loginForm().remove();
-                Modal.signUpForm();
-                Modal.handleSignUpModal();
-            
-            });
-        });
-    }
-
-    static closeModal() {
-    
-        const xFactor = document.querySelectorAll(".fa-xmark");
-        const modal   = document.querySelectorAll(".form__container");
-
-        xFactor.forEach(element => {
-            
-            element.addEventListener("click", () => {
-        
-                modal.forEach(elem => {
-                    
-                    elem.remove();
-                    
-                });
-            });
-        });
-    }
 }

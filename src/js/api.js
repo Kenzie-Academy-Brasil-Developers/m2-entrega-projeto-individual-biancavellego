@@ -36,7 +36,7 @@ export class Api {
 
     static async createUser(data) {
 
-        const response = await fetch(`${this.urlBase}register/user`, {
+        const response = await fetch(`${this.urlBase}auth/register/user`, {
                                     method: "POST",
                                     headers: this.headers,
                                     body: JSON.stringify(data)

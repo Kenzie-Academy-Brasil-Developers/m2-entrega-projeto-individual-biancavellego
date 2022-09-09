@@ -190,6 +190,7 @@ main {
     border-radius: 10px;
     padding: 10px 15px;
     margin: 10px 0px 5px 0px;
+    min-width: 130px;
     transition: .5s;
 }
 
