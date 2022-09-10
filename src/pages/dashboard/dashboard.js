@@ -9,7 +9,7 @@ class Dashboard {
     
         if(!this.token) { 
         
-            window.location.assign("../home/index.html");
+            window.location.replace("../home/index.html");
         
         }
     

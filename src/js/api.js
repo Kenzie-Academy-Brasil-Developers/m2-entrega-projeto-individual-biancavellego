@@ -94,7 +94,26 @@ export class Api {
 
     static async listCompanies() {
         
-        const response = await fetch(`${this.ulrBase}companies`, {
+        const companies = await fetch(`${this.ulrBase}companies`, {
+                                    method: "GET",
+                                    headers: this.headers
+                                })
+                                .then(resp => resp.json())
+                                .then(resp => {
+                                    
+                                    console.log(resp);
+                                    return resp;
+                                
+                                })
+                                .catch(err => console.log(err));
+
+        return companies;
+        
+    }
+
+    static async listCompaniesBySector(sector) {
+    
+         const sectors = await fetch(`${this.ulrBase}companies/${sector}`, {
                                     method: "GET",
                                     headers: this.headers
                                 })
@@ -102,13 +121,7 @@ export class Api {
                                 .then(resp => console.log(resp))
                                 .catch(err => console.log(err));
 
-        return response;
-        
-    }
-
-    static async listCompaniesBySector() {
-    
-
+        return sectors;
     
     }
 
@@ -116,7 +129,7 @@ export class Api {
     //LOGGED USERS:
     static async listAllSectorEmployees() {
     
-    
+        
     
     }
 
