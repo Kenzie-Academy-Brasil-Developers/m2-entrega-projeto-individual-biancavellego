@@ -1,5 +1,6 @@
 import { Modal } from "./modal.js";
 import { Toast } from "./toast.js";
+import { HomePage } from "../pages/home/index.js";
 
 export class Api {
 
@@ -17,26 +18,29 @@ export class Api {
                                     headers: this.headers,
                                     body: JSON.stringify(data)
                                 })
-                                .then(resp => resp.json())
+                                .then((resp) => resp.json())
                                 .then(resp => {
 
                                     console.log(resp);
 
-                                    if(resp.ok) {
+                                    if(resp.error) {
+                                    
+                                        return Toast.create(resp.error, "red");
 
-                                        localStorage.setItem("@kenzieEnterprises:token", resp.token);
-                                        localStorage.setItem("@kenzieEnterprises:User_id", resp.uuid);
-                                        Toast.create("Success! You are now logged in.", "linear-gradient(to right, #00b09b, #96c93d)");
-                            
-                                        setTimeout(() => {
-                                        
-                                            window.location.replace("../dashboard/dashboard.html");
-                                        
-                                        }, 2000);
                                     }
 
-                                    Toast.create(resp.error, "red");
+                                    localStorage.setItem("@kenzieEnterprises:token", resp.token);
+                                    localStorage.setItem("@kenzieEnterprises:user_id", resp.uuid);
+                                    localStorage.setItem("@kenzieEnterprises:is_admin", resp.is_admin);
+                                    Toast.create("Success! You are now logged in.", "linear-gradient(to right, #00b09b, #96c93d)");
+                            
+                                    HomePage.handleLogout();
 
+                                    setTimeout(() => {
+                                        
+                                        window.location.replace("../dashboard/dashboard.html");
+                                        
+                                    }, 2000);
                                 })
                                 .catch(err => {
 

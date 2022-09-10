@@ -141,6 +141,20 @@ h1 {
     filter: invert(100%);
 }
 
+.menu__button__mobile .logout__button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--white);
+    background-color: var(--black);
+    cursor: pointer;
+    font-size: .9rem;
+    text-decoration: none;
+    padding: 15px;
+    width: 165px;
+    transition: .5s;
+}
+
 main {
     position: relative;
 }
@@ -265,7 +279,7 @@ footer p {
         align-items: center;
         cursor: pointer;
         border: none;
-        padding: 0px 0px 0px 10px;
+        padding: 0px 0px 0px 20px;
         height: 80px;
         color: var(--white);
         background-color: var(--black);
@@ -301,6 +315,20 @@ footer p {
     .menu__user__button img {
         width: 40px;
         height: 40px;
+    }
+
+    .fa-arrow-right-from-bracket {
+        transform: scale(2);
+        filter: invert(60%);
+        padding: 10px;
+    }
+
+    .fa-user-tie {
+        border: 2px solid var(--white);
+        border-radius: 50%;
+        padding: 5px;
+        transform: scale(2);
+        filter: invert(60%);
     }
 
     #main__video--mobile {
