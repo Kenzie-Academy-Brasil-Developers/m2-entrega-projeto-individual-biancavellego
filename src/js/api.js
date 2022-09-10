@@ -55,7 +55,7 @@ export class Api {
 
     static async createUser(data) {
 
-        const response = await fetch(`${this.urlBase}auth/register/user`, {
+        const response = await fetch(`http://localhost:6278/auth/register/user`, {
                                     method: "POST",
                                     headers: this.headers,
                                     body: JSON.stringify(data)
@@ -64,8 +64,27 @@ export class Api {
                                 .then(resp => {
 
                                     console.log(resp);
-                                    Modal.loginForm();
 
+                                    if(resp.error) {
+                                    
+                                        return Toast.create(resp.error, "red");
+
+                                    }
+
+                                    Toast.create("You subscribed successfully!", "linear-gradient(to right, #00b09b, #96c93d)");
+                                    const signUpModal = document.querySelector(".form__signUp");
+                                    const main        = document.querySelector("main");
+                                    const loginModal  = Modal.loginForm();
+
+                                    signUpModal.classList.add("disappearAnimation");
+
+                                    setTimeout(()=> {
+                                        
+                                        signUpModal.remove();
+                                        main.append(loginModal);
+                                        Modal.handleLoginModal();
+                                    
+                                    }, 2000);
                                 })
                                 .catch(err => console.log(err));
 

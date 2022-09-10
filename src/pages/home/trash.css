@@ -105,3 +105,49 @@ main {
    left: -13px;
    cursor: none;
 }
+
+
+
+{uuid: '98275576-3699-4bf2-b18f-ea92c0147feb', is_admin: false, username: 'Whatever', email: 'whatever@kenzie.com', password: '$2a$08$2HhjW4xs1RyaXzhRNAZP.Ol1pxFzjWieIG0ymM8JyK2CKDayDgiaO'}
+email
+: 
+"whatever@kenzie.com"
+is_admin
+: 
+false
+password
+: 
+"$2a$08$2HhjW4xs1RyaXzhRNAZP.Ol1pxFzjWieIG0ymM8JyK2CKDayDgiaO"
+username
+: 
+"Whatever"
+uuid
+: 
+"98275576-3699-4bf2-b18f-ea92c0147feb"
+[[Prototype]]
+: 
+Object
+
+
+{uuid: 'b4dcd60b-d20d-4adf-9ed5-2b30bcd8a848', is_admin: false, username: 'dasdasd', email: 'adasd@asdasd.com', password: '$2a$08$knLc13ynRvHWfY0B6vb0VOft9RWVThR2l9HxgaCYQmGhk2nsrWDYy', …}
+email
+: 
+"adasd@asdasd.com"
+is_admin
+: 
+false
+password
+: 
+"$2a$08$knLc13ynRvHWfY0B6vb0VOft9RWVThR2l9HxgaCYQmGhk2nsrWDYy"
+professional_level
+: 
+"júnior"
+username
+: 
+"dasdasd"
+uuid
+: 
+"b4dcd60b-d20d-4adf-9ed5-2b30bcd8a848"
+[[Prototype]]
+: 
+Object

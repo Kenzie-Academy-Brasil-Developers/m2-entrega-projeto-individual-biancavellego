@@ -81,6 +81,7 @@ export class Modal {
         const labelSenior          = document.createElement("label");
         const inputSenior          = document.createElement("input");
         const spanErrorMessage     = document.createElement("span");
+        const spanErrorMessage2    = document.createElement("span");
         const registerButton       = document.createElement("button");
         const tagP                 = `<p>Already a user? Login with your account <span class="form__handle">here!</span></p>`;
 
@@ -100,7 +101,8 @@ export class Modal {
         inputMid.setAttribute("id", "mid-level");
         divInputContainer3.classList.add("form__register__proLevel__container");
         inputSenior.setAttribute("id", "senior");
-        spanErrorMessage.classList.add("form__error__message");
+        spanErrorMessage.classList.add("form__error__message", "error__password");
+        spanErrorMessage2.classList.add("form__error__message", "error__proLevel");
         registerButton.classList.add("form__button");
 
         labelUsername.setAttribute("for", "username");
@@ -154,7 +156,7 @@ export class Modal {
         divInputContainer1.append(labelJunior, inputJunior);
         divInputContainer2.append(labelMid, inputMid);
         divInputContainer3.append(labelSenior, inputSenior);
-        divInput.append(labelUsername, inputUsername, labelEmail, inputEmail, labelCreatePassword, inputCreatePassword, labelConfirmPassword, inputConfirmPassword, labelProLevel, divRegisterContainer, registerButton);
+        divInput.append(labelUsername, inputUsername, labelEmail, inputEmail, labelCreatePassword, inputCreatePassword, spanErrorMessage, labelConfirmPassword, inputConfirmPassword, labelProLevel, divRegisterContainer, spanErrorMessage2, registerButton);
         divInput.insertAdjacentHTML("beforeend", tagP);
         form.append(divTitle, divInput);
         sectionSignUp.append(form);
@@ -302,14 +304,15 @@ export class Modal {
         const inputMidLevel        = document.querySelector("#mid-level");
         const inputSenior          = document.querySelector("#senior");
         const registerButton       = document.querySelector(".form__button");
-        const errorMessage         = document.querySelector(".form__error__message");
+        const spanErrorMessage     = document.querySelector(".error__password");
+        const spanErrorMessage2    = document.querySelector(".error__proLevel");
         let   proLevelSelected;
 
         registerButton.addEventListener("click", async () => {
         
             if(inputPassword.value !== confirmedPassword.value) {
         
-                errorMessage.innerText = "Passwords do not match. Please, type again your password."
+                spanErrorMessage.innerHTML = "Passwords do not match. Please, type again your password."
             
             }
 
@@ -327,7 +330,7 @@ export class Modal {
             
             } else {
             
-                errorMessage.innerText = "Please, select a professional level.";
+                spanErrorMessage2.innerText = "Please, select a professional level.";
             
             }
 
@@ -341,7 +344,6 @@ export class Modal {
             await Api.createUser(data);
 
         });
-
     }
 
     
