@@ -307,7 +307,7 @@ export class Modal {
 
         registerButton.addEventListener("click", async () => {
         
-            if(inputPassword.innerText !== confirmedPassword.innerText) {
+            if(inputPassword.value !== confirmedPassword.value) {
         
                 errorMessage.innerText = "Passwords do not match. Please, type again your password."
             
