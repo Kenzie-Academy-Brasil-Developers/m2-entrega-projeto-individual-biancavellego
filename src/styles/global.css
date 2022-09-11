@@ -12,6 +12,7 @@
 	--grey: rgb(80, 77, 77);
 	--dark-grey: rgb(42, 42, 41);
 	--ball-transition: translateX(0px);
+	--dash-background: linear-gradient(to right, #232526, #414345);
 }
 
 .dark__mode:root {
@@ -19,6 +20,7 @@
 	--pause-button: rgb(12, 12, 12);
 	--title-color: rgb(208, 208, 206);
 	--ball-transition: translateX(24px);
+	--dash-background: linear-gradient(to right, var(--black), #434343);
 }
 
 html, body, div, span, applet, object, iframe,
