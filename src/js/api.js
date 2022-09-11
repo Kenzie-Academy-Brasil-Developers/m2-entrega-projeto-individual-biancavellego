@@ -118,7 +118,10 @@ export class Api {
                                     headers: this.headers
                                 })
                                 .then(resp => resp.json())
-                                .then(resp => console.log(resp))
+                                .then(resp => 
+                                    {console.log(resp)
+                                    return resp;
+                                })
                                 .catch(err => console.log(err));
 
         return sectors;

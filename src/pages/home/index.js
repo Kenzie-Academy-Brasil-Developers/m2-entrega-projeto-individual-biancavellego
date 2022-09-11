@@ -143,12 +143,7 @@ export class HomePage {
 
                 arraySectorsNonDuplicates.forEach(async (sector) => {
                 
-                    //WORKING!!!
-                    await Api.listCompaniesBySector(sector);
-                    //NEXT STEP: transferir sector para outra função e criar efeito bubbling na UL de cada interface mobile/desktop e criar
-                    //condições para cada li (ex: se o sector clicado for igual ao innerText da tagLi, renderizar as empresas deste sector);
-                    //Lembrar de estilizar as ULs e tags Li de cada interface...
-                    //HomePage.renderBySector(sector);
+                    await HomePage.renderBySector(sector);
                 
                 });
             });
@@ -157,17 +152,17 @@ export class HomePage {
 
     static async renderAllCompanies() {
     
-        const main                = document.querySelector("main");
-        const mainTitleContainer  = document.querySelector(".main__title__container");
-        const showAllbutton       = document.querySelectorAll(".showAll__button");
-        const ulContainerMain     = document.createElement("ul");
-        const allCompaniesData    = await Api.listCompanies();
+        const main               = document.querySelector("main");
+        const ulContainerMain    = document.createElement("ul");
+        const mainTitleContainer = document.querySelector(".main__title__container");
+        const showAllbutton      = document.querySelectorAll(".showAll__button");
+        const allCompaniesData   = await Api.listCompanies();
            
         showAllbutton.forEach(element => {
 
             element.addEventListener("click", async () => {
            
-                mainTitleContainer.style.display = "none";
+                mainTitleContainer.classList.add("hidden");
                 ulContainerMain.innerHTML        = "";
    
                 allCompaniesData.forEach(async (object) => {
@@ -204,24 +199,89 @@ export class HomePage {
         });
     }
 
-    static renderBySector(sectorId) {
-    
+    static async renderBySector(sector) {
+
+        const main               = document.querySelector("main");
+        const ulContainerMain    = document.createElement("ul");
         const mainTitleContainer = document.querySelector(".main__title__container");
-        const sectorOptionsMobile  = document.querySelector(".bySector__options__container--mobile");
-        const sectorOptionsDesktop = document.querySelector(".bySector__options__container--desktop");
+        const sectorULMobile     = document.querySelector(".bySector__options__container--mobile");
+        const sectorULDesktop    = document.querySelector(".bySector__options__container--desktop");
+        const sectorLiMobile     = document.querySelectorAll(".bySector__options__container--mobile li");
+        const sectorLiDesktop    = document.querySelectorAll(".bySector__options__container--desktop li");
 
-        //Usar efeito bubbling e chamar função que renderiza opções de setores das empresas...
-        // sectorOptionsMobile.forEach(element => {
+        sectorULMobile.addEventListener("click", async (event) => {
+
+            sectorLiMobile.forEach(async (element) => {
             
-        //     element.addEventListener("click", async (event) => {
+                if(event.target === element) {
+            
+                    mainTitleContainer.classList.add("hidden");
+                    ulContainerMain.innerHTML = "";
+    
+                    if(element.innerHTML === sector) {
                 
-        //         if(event.target)
+                        const objectArraySector = await Api.listCompaniesBySector(sector);
+                        objectArraySector.forEach(async (object) => {
+                        
+                            const liContainerCompany = document.createElement("li");
+                            const name               = document.createElement("p");
+                            const hours              = document.createElement("p");
+                            const description        = document.createElement("p");
+                            const sector             = document.createElement("p");
+            
+                            ulContainerMain.classList.add("main__list__container");
+            
+                            name.innerText        = await object.name;
+                            hours.innerText       = await object.opening_hours;
+                            description.innerText = await object.description;
+                            sector.innerText      = await object.sectors.description;
+            
+                            liContainerCompany.append(name, hours, description, sector);
+                            ulContainerMain.append(liContainerCompany);
+                            main.append(ulContainerMain);
+                        
+                        });
+                    }
+                }
+            })
+        });
 
-        //         mainTitleContainer.style.display = "none";
-        //         await Api.listCompaniesBySector(sectorId);
+        sectorULDesktop.addEventListener("click", async (event) => {
         
-        //     });
-        // });
+            sectorLiDesktop.forEach(async (element) => {
+            
+                if(event.target === element) {
+            
+                    mainTitleContainer.classList.add("hidden");
+                    ulContainerMain.innerHTML = "";
+    
+                    if(element.innerHTML === sector) {
+                
+                        const objectArraySector = await Api.listCompaniesBySector(sector);
+                        objectArraySector.forEach(async (object) => {
+                        
+                            const liContainerCompany = document.createElement("li");
+                            const name               = document.createElement("p");
+                            const hours              = document.createElement("p");
+                            const description        = document.createElement("p");
+                            const sector             = document.createElement("p");
+            
+                            ulContainerMain.classList.add("main__list__container");
+            
+                            name.innerText        = await object.name;
+                            hours.innerText       = await object.opening_hours;
+                            description.innerText = await object.description;
+                            sector.innerText      = await object.sectors.description;
+            
+                            liContainerCompany.append(name, hours, description, sector);
+                            ulContainerMain.append(liContainerCompany);
+                            main.append(ulContainerMain);
+                        
+                        });
+                    }
+                }
+            });
+        });
     }
 }
 
