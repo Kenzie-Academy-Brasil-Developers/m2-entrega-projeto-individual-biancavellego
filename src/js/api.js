@@ -118,100 +118,359 @@ export class Api {
                                     headers: this.headers
                                 })
                                 .then(resp => resp.json())
-                                .then(resp => 
-                                    {console.log(resp)
+                                .then(resp => {
+                                    
+                                    console.log(resp);
                                     return resp;
+
                                 })
                                 .catch(err => console.log(err));
 
         return sectors;
     
     }
+/*******************************************************************************************************************************************/ 
+/*********************************************************LOGGED USER***********************************************************************/ 
+/*******************************************************************************************************************************************/
 
-
-    //LOGGED USERS:
-    static async listAllSectorEmployees() {
+    static async loggedUserInfo() {
     
-        
+        const userInfo = await fetch(`${this.ulrBase}users/profile`, {
+                                    method: "GET",
+                                    headers: this.headers
+                                })
+                                .then(resp => resp.json())
+                                .then(resp => {
+                                  
+                                  console.log(resp);
+                                  return resp;
+
+                                })
+                                .catch(err => console.log(err));
+
+        return userInfo;
+
+    }
+
+    static async allUsersCoworkersDepartment() {
+    
+
+        const userDepartmentCoworkers = await fetch(`${this.ulrBase}departments/coworkers`, {
+                                            method: "GET",
+                                            headers: this.headers
+                                        })
+                                        .then(resp => resp.json())
+                                        .then(resp => {
+                                  
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return userDepartmentCoworkers;
     
     }
 
-    static async listEmployeeDepartment() {
+    static async allUsersCompanyDepartments() {
     
-    
+        const usersCompanyDepartments = await fetch(`${this.ulrBase}departments`, {
+                                            method: "GET",
+                                            headers: this.headers
+                                        })
+                                        .then(resp => resp.json())
+                                        .then(resp => {
+                                  
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return usersCompanyDepartments;
     
     }
 
-    static async updateEmployeeData() {
+    static async updateUserData(data) {
     
-    
+        const userDataUpdate = await fetch(`${this.ulrBase}users`, {
+                                           method: "PATCH",
+                                           headers: this.headers,
+                                           body: JSON.stringify(data)
+                                       })
+                                       .then(resp => resp.json())
+                                       .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return userDataUpdate;        
     
     }
 
-    //ADMIN:
+/*******************************************************************************************************************************************/ 
+/*********************************************************ADMIN USER************************************************************************/ 
+/*******************************************************************************************************************************************/
+
     static async listAllEmployees() {
-    
-        
+
+      const listAllEmployees = await fetch(`${this.ulrBase}users`, {
+                                           method: "GET",
+                                           headers: this.headers,
+                                       })
+                                       .then(resp => resp.json())
+                                       .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return listAllEmployees;        
 
     }
-
+ 
     static async noDepartmentUsers() {
     
-        
+      const departmentlessUsers = await fetch(`${this.ulrBase}admin/out_of_work`, {
+                                           method: "GET",
+                                           headers: this.headers,
+                                       })
+                                       .then(resp => resp.json())
+                                       .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return departmentlessUsers;
     
     }
 
-    static async updateEmployeeDataAdmin() {
+    static async updateEmployeeDataAdmin(data, uuid) {
     
-        
+      const updatedEmployeeData = await fetch(`${this.ulrBase}admin/update_user/${uuid}`, {
+                                           method: "PATCH",
+                                           headers: this.headers,
+                                           body: JSON.stringify(data)
+                                       })
+                                       .then(resp => resp.json())
+                                       .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return updatedEmployeeData;
+    
+    }
+    
+    static async deleteUser(uuid) {
+
+      const deleteUserRequest = await fetch(`${this.ulrBase}admin/delete_user/${uuid}`, {
+                                           method: "DELETE",
+                                           headers: this.headers,
+                                       })
+                                       .then(resp => resp.json())
+                                       .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return deleteUserRequest;
     
     }
 
-    static async subscribeCompany() {
-    
+/***************************************************************COMPANY********************************************************************/
 
+    static async subscribeCompany(data) {
+
+      const subscribingCompany = await fetch(`${this.ulrBase}companies`, {
+                                           method: "POST",
+                                           headers: this.headers,
+                                           body: JSON.stringify(data)
+                                        })
+                                        .then(resp => resp.json())
+                                        .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return subscribingCompany;
     
     }
+
+/***************************************************************SECTORS********************************************************************/
 
     static async listAllSectors() {
-    
-        
+
+      const allSectors = await fetch(`${this.ulrBase}sectors`, {
+                                   method: "GET",
+                                   headers: this.headers,
+                                })
+                                .then(resp => resp.json())
+                                .then(resp => {
+                                 
+                                    console.log(resp);
+                                    return resp;
+
+                                })
+                                .catch(err => console.log(err));
+
+        return allSectors;
         
     }
+
+/**************************************************************DEPARTMENT******************************************************************/
 
     static async listAllDepartments() {
+
+        const allDepartments = await fetch(`${this.ulrBase}departments`, {
+                                            method: "GET",
+                                            headers: this.headers,
+                                        })
+                                        .then(resp => resp.json())
+                                        .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return allDepartments;
     
+    }
+
+    static async listAllCompaniesDepartments(uuidCompany) {
         
+        const allDepartmentsCompany = await fetch(`${this.ulrBase}departments/${uuidCompany}`, {
+                                                method: "GET",
+                                                headers: this.headers,
+                                            })
+                                            .then(resp => resp.json())
+                                            .then(resp => {
+                                 
+                                                console.log(resp);
+                                                return resp;
+
+                                            })
+                                            .catch(err => console.log(err));
+
+        return allDepartmentsCompany;
     
     }
 
-    static async listAllCompaniesDepartments() {
-        
+    static async createDepartment(data) {
 
+          const createRequest = await fetch(`${this.ulrBase}departments`, {
+                                            method: "POST",
+                                            headers: this.headers,
+                                            body: JSON.stringify(data)
+                                        })
+                                        .then(resp => resp.json())
+                                        .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return createRequest;
+    
+
+    }
+
+    static async hireEmployee(data) {
+
+        const hiringRequest = await fetch(`${this.ulrBase}departments/hire/`, {
+                                        method: "PATCH",
+                                        headers: this.headers,
+                                        body: JSON.stringify(data)
+                                    })
+                                    .then(resp => resp.json())
+                                    .then(resp => {
+                                 
+                                        console.log(resp);
+                                        return resp;
+
+                                    })
+                                    .catch(err => console.log(err));
+
+        return hiringRequest;
     
     }
 
-    static async createDepartment() {
+    static async fireEmployee(uuid) {
+
+        const hiringRequest = await fetch(`${this.ulrBase}departments/dismiss/${uuid}`, {
+                                        method: "PATCH",
+                                        headers: this.headers,
+                                    })
+                                    .then(resp => resp.json())
+                                    .then(resp => {
+                                 
+                                        console.log(resp);
+                                        return resp;
+
+                                    })
+                                    .catch(err => console.log(err));
+
+        return hiringRequest;
     
-    
+    }
+
+    static async editDepartment(data, uuidCompany) {
+
+        const editingDepartment = await fetch(`${this.ulrBase}departments/${uuidCompany}`, {
+                                            method: "PATCH",
+                                            headers: this.headers,
+                                            body: JSON.stringify(data)
+                                        })
+                                        .then(resp => resp.json())
+                                        .then(resp => {
+                                 
+                                            console.log(resp);
+                                            return resp;
+
+                                        })
+                                        .catch(err => console.log(err));
+
+        return editingDepartment;
 
     }
 
-    static async hireEmployee() {
-    
-        
+    static async deleteDepartment(uuidCompany) {
 
-    }
+        const deletingDepartment = await fetch(`${this.ulrBase}departments/${uuidCompany}`, {
+                                                method: "DELETE",
+                                                headers: this.headers,
+                                            })
+                                            .then(resp => resp.json())
+                                            .then(resp => {
+                                 
+                                                console.log(resp);
+                                                return resp;
 
-    static async fireEmployee() {
-    
-        
-    
-    }
+                                            })
+                                            .catch(err => console.log(err));
 
-    static async deleteDepartment() {
-    
-    
+        return deletingDepartment;
     
     }
 }
