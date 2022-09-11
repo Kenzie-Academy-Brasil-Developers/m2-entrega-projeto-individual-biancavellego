@@ -1,14 +1,22 @@
-import { Api } from "../../js/api.js";
+//import { Api } from "../../js/api.js";
 import { Toast } from "../../js/toast.js";
-class Dashboard {
+//import { HomePage } from "../home/index.js";
+export class Dashboard {
 
     static token = localStorage.getItem("@kenzieEnterprises:token");
 
-    static renderDashboard() {
+    static getUserValue() {
+        
+        const isAdmin = JSON.parse(window.localStorage.getItem("@kenzieEnterprises:is_admin"));
+        return isAdmin.is_admin;
     
+    }
+
+    static async renderDashboard() {
+
         if(!this.token) {
         
-            window.location.replace("../home/index.html");
+            //window.location.replace("../home/index.html");
             
         }
     
