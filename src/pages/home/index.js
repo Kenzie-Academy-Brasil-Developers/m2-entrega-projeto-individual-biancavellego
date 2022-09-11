@@ -152,8 +152,7 @@ export class HomePage {
 
     static async renderAllCompanies() {
     
-        const main               = document.querySelector("main");
-        const ulContainerMain    = document.createElement("ul");
+        const ulContainerMain    = document.querySelector(".main__list__container");
         const mainTitleContainer = document.querySelector(".main__title__container");
         const showAllbutton      = document.querySelectorAll(".showAll__button");
         const allCompaniesData   = await Api.listCompanies();
@@ -163,36 +162,24 @@ export class HomePage {
             element.addEventListener("click", async () => {
            
                 mainTitleContainer.classList.add("hidden");
-                ulContainerMain.innerHTML        = "";
+                ulContainerMain.classList.remove("hidden");
+                ulContainerMain.innerHTML = "";
    
                 allCompaniesData.forEach(async (object) => {
-                   
-                // const sample = {
-                //      "name": 'Skina Lanches', 
-                //      "opening_hours": '09:00', 
-                //      "description": 'Podrão de qualidade', 
-                //      "sectors": 
-                //          {"uuid": '08502c47-9072-4c11-803c-5c4dd72c0531',
-                //          "description": 'Alimenticio'},
-                //      "uuid": '831b0657-85cf-40d6-872f-366f7ac57920',
-                // }
 
-                const liContainerCompany = document.createElement("li");
-                const name               = document.createElement("p");
-                const hours              = document.createElement("p");
-                const description        = document.createElement("p");
-                const sector             = document.createElement("p");
+                    const liContainerCompany = document.createElement("li");
+                    const name               = document.createElement("p");
+                    const hours              = document.createElement("p");
+                    const description        = document.createElement("p");
+                    const sector             = document.createElement("p");
 
-                ulContainerMain.classList.add("main__list__container");
+                    name.innerText        = `Company: ${await object.name}`;
+                    hours.innerText       = `Opens: ${await object.opening_hours}`;
+                    description.innerText = `Description: ${await object.description}`;
+                    sector.innerText      = `Sector: ${await object.sectors.description}`;
 
-                name.innerText        = await object.name;
-                hours.innerText       = await object.opening_hours;
-                description.innerText = await object.description;
-                sector.innerText      = await object.sectors.description;
-
-                liContainerCompany.append(name, hours, description, sector);
-                ulContainerMain.append(liContainerCompany);
-                main.append(ulContainerMain);
+                    liContainerCompany.append(name, hours, description, sector);
+                    ulContainerMain.append(liContainerCompany);
 
                 });
             });
@@ -201,8 +188,7 @@ export class HomePage {
 
     static async renderBySector(sector) {
 
-        const main               = document.querySelector("main");
-        const ulContainerMain    = document.createElement("ul");
+        const ulContainerMain    = document.querySelector(".main__list__container");
         const mainTitleContainer = document.querySelector(".main__title__container");
         const sectorULMobile     = document.querySelector(".bySector__options__container--mobile");
         const sectorULDesktop    = document.querySelector(".bySector__options__container--desktop");
@@ -216,6 +202,7 @@ export class HomePage {
                 if(event.target === element) {
             
                     mainTitleContainer.classList.add("hidden");
+                    ulContainerMain.classList.remove("hidden");
                     ulContainerMain.innerHTML = "";
     
                     if(element.innerHTML === sector) {
@@ -229,16 +216,13 @@ export class HomePage {
                             const description        = document.createElement("p");
                             const sector             = document.createElement("p");
             
-                            ulContainerMain.classList.add("main__list__container");
-            
-                            name.innerText        = await object.name;
-                            hours.innerText       = await object.opening_hours;
-                            description.innerText = await object.description;
-                            sector.innerText      = await object.sectors.description;
+                            name.innerText        = `Company: ${await object.name}`;
+                            hours.innerText       = `Opens: ${await object.opening_hours}`;
+                            description.innerText = `Description: ${await object.description}`;
+                            sector.innerText      = `Sector: ${await object.sectors.description}`;
             
                             liContainerCompany.append(name, hours, description, sector);
                             ulContainerMain.append(liContainerCompany);
-                            main.append(ulContainerMain);
                         
                         });
                     }
@@ -253,6 +237,7 @@ export class HomePage {
                 if(event.target === element) {
             
                     mainTitleContainer.classList.add("hidden");
+                    ulContainerMain.classList.remove("hidden");
                     ulContainerMain.innerHTML = "";
     
                     if(element.innerHTML === sector) {
@@ -266,21 +251,33 @@ export class HomePage {
                             const description        = document.createElement("p");
                             const sector             = document.createElement("p");
             
-                            ulContainerMain.classList.add("main__list__container");
-            
-                            name.innerText        = await object.name;
-                            hours.innerText       = await object.opening_hours;
-                            description.innerText = await object.description;
-                            sector.innerText      = await object.sectors.description;
+                            name.innerText        = `Company: ${await object.name}`;
+                            hours.innerText       = `Opens: ${await object.opening_hours}`;
+                            description.innerText = `Description: ${await object.description}`;
+                            sector.innerText      = `Sector: ${await object.sectors.description}`;
             
                             liContainerCompany.append(name, hours, description, sector);
                             ulContainerMain.append(liContainerCompany);
-                            main.append(ulContainerMain);
                         
                         });
                     }
                 }
             });
+        });
+    }
+
+    static resetScreen() {
+    
+        const main               = document.querySelector("main");
+        const mainTitleContainer = document.querySelector(".main__title__container");
+        const ulContainerMain    = document.querySelector(".main__list__container");
+
+        main.addEventListener("click", () => {
+        
+            mainTitleContainer.classList.remove("hidden");
+            ulContainerMain.classList.add("hidden");
+            ulContainerMain.innerHTML = "";
+        
         });
     }
 }
@@ -289,6 +286,7 @@ HomePage.handleDarkMode();
 HomePage.handleMobileMenu();
 HomePage.handleLogout();
 HomePage.pauseVideo();
+HomePage.resetScreen();
 HomePage.renderAllCompanies();
 HomePage.renderSectorMenu();
 Modal.showLoginModal();

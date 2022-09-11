@@ -163,3 +163,24 @@ Object
     max-width: 100%;
     padding: 10px;
 }
+
+
+.main__list__container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* 
+// const sample = {
+    //      "name": 'Skina Lanches', 
+    //      "opening_hours": '09:00', 
+    //      "description": 'Podrão de qualidade', 
+    //      "sectors": 
+    //          {"uuid": '08502c47-9072-4c11-803c-5c4dd72c0531',
+    //          "description": 'Alimenticio'},
+    //      "uuid": '831b0657-85cf-40d6-872f-366f7ac57920',
+    // } */
