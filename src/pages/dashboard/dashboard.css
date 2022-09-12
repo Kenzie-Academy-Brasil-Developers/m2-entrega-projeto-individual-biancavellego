@@ -241,6 +241,11 @@ footer p {
         align-items: center;
         justify-content: flex-end;
         width: 60%;
+        max-width: 600px;
+    }
+
+    .nav__button__container--desktop {
+        position: relative;
     }
 
     .nav__button__container--desktop button {
@@ -265,14 +270,30 @@ footer p {
         color: var(--grey);
     
     }
-
-    .nav__button__container--desktop ul {
-        position: absolute;
-        top: 125px;
+    
+    .company__button--desktop {
+        
     }
 
-    .company__button--desktop {
-        position: relative;
+    .company__button--desktop ul {
+
+    }
+
+    .sectors__button--desktop {
+
+    }
+
+    .sectors__button--desktop ul {
+        
+    }
+
+    .department__button--desktop {
+
+    
+    }
+
+    .department__button--desktop ul {
+        
     }
 
     .mobile {
