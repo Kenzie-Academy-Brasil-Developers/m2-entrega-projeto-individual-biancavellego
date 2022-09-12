@@ -19,6 +19,20 @@ export class Dashboard {
         }
     }
 
+    static handleDarkMode() {
+    
+        const modeButton = document.querySelector("#dark__toggle");
+        const html       = document.querySelector("html");
+
+        modeButton.addEventListener("click", () => {
+            
+                html.classList.toggle("dark__mode");
+            
+        });
+    
+    }
+
 }
 
 Dashboard.renderDashboard();
+Dashboard.handleDarkMode();

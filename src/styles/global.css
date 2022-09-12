@@ -12,15 +12,26 @@
 	--grey: rgb(80, 77, 77);
 	--dark-grey: rgb(42, 42, 41);
 	--ball-transition: translateX(0px);
-	--dash-background: linear-gradient(to right, #232526, #414345);
+	--dash-nav: var(--white);
+	--dash-menu: var(--black);
+	--dash-menu-content: rgb(153, 147, 147);
+	--dash-dark-toggle-background: var(--black);
+	--dash-dark-toggle-border: #7e7568;
+	--dash-dark-toggle-ball: #7e7568;
 }
+
+/* linear-gradient(to right, #ada996, #f2f2f2, #dbdbdb, #eaeaea) */
 
 .dark__mode:root {
 	--menu-color: rgb(42, 42, 41);
 	--pause-button: rgb(12, 12, 12);
 	--title-color: rgb(208, 208, 206);
 	--ball-transition: translateX(24px);
-	--dash-background: linear-gradient(to right, var(--black), #434343);
+	--dash-nav: #1f2223;
+	--dash-menu: var(--black);
+	--dash-menu-content: var(--grey);
+	--dash-dark-toggle-border: #887e70;
+	--dash-dark-toggle-background: #333739;
 }
 
 html, body, div, span, applet, object, iframe,
