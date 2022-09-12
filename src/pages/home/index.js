@@ -54,51 +54,61 @@ export class HomePage {
         });
     }
 
-    static handleLogout() {
-        
-        const logoutButton = document.querySelectorAll(".login__button");
-        const token        = localStorage.getItem("@kenzieEnterprises:token");
+    static async renderLogoutButton() {
 
-        logoutButton.forEach(element => {
+        const loginButton = document.querySelectorAll(".login__button");
+        const token       = localStorage.getItem("@kenzieEnterprises:token");
 
-            if(token) {
-        
+        if(token) {
+
+            loginButton.forEach(element => {
+                        
                 if(element.className.includes("menu__button--desktop login__button")) {
-                    
+                            
                     const tagI = document.createElement("i");
                     tagI.classList.add("fa-solid", "fa-arrow-right-from-bracket");
-
+        
                     element.className = "menu__button--desktop logout__button";
                     element.innerHTML = "Logout";
                     element.append(tagI);
-
+        
                 }else if(element.className.includes("menu__user__button login__button")) {
-
+            
                     const tagI = document.createElement("i");
                     tagI.classList.add("fa-solid", "fa-user-tie");
-
+        
                     element.className = "menu__user__button login logout__button";
                     element.innerHTML = "";
                     element.append(tagI);
-
+        
                 }else if(element.className.includes("menu__button__mobile login__button")) {
-                
-                    const tagImg = document.createElement("img");
+                        
+                const tagImg = document.createElement("img");
                     tagImg.src   = `../../img/icons/Grid - Small.svg`;
-
+        
                     element.className = "menu__button__mobile logout__button";
                     element.innerText = "Logout";
                     element.append(tagImg);
-              
+                    
                 }
+            });
+        }
 
-                element.addEventListener('click', () => {
+       
+    }
 
-                    localStorage.clear();
-                    window.location.replace('../home/index.html');
-            
-                });
-            }
+    static toLogout() {
+    
+    const logoutButton = document.querySelectorAll(".logout__button");
+
+        logoutButton.forEach(element => {
+        
+            element.addEventListener("click", () => {
+                                    
+                localStorage.clear();
+                window.location.replace('../home/index.html');
+                                
+            });
         });
     }
 
@@ -284,10 +294,11 @@ export class HomePage {
 
 HomePage.handleDarkMode();
 HomePage.handleMobileMenu();
-HomePage.handleLogout();
 HomePage.pauseVideo();
 HomePage.resetScreen();
 HomePage.renderAllCompanies();
 HomePage.renderSectorMenu();
+HomePage.renderLogoutButton();
+HomePage.toLogout();
 Modal.showLoginModal();
 Modal.showSignUpModal();

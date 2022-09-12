@@ -1,7 +1,5 @@
 import { Modal } from "./modal.js";
 import { Toast } from "./toast.js";
-//import { HomePage } from "../pages/home/index.js";
-
 export class Api {
 
     static ulrBase = "http://localhost:6278/";
@@ -33,14 +31,12 @@ export class Api {
                                     localStorage.setItem("@kenzieEnterprises:user_id", resp.uuid);
                                     localStorage.setItem("@kenzieEnterprises:is_admin", resp.is_admin);
                                     Toast.create("Success! You are now logged in.", "linear-gradient(to right, #00b09b, #96c93d)");
-                            
-                                    //HomePage.handleLogout();
 
                                     setTimeout(() => {
                                         
                                         window.location.replace("../dashboard/dashboard.html");
                                         
-                                    }, 2000);
+                                    }, 1000);
                                 })
                                 .catch(err => {
 
@@ -75,7 +71,7 @@ export class Api {
                                     const signUpModal = document.querySelector(".form__signUp");
                                     const main        = document.querySelector("main");
                                     const loginModal  = Modal.loginForm();
-
+                                    
                                     signUpModal.classList.add("disappearAnimation");
 
                                     setTimeout(()=> {
@@ -83,7 +79,7 @@ export class Api {
                                         signUpModal.remove();
                                         main.append(loginModal);
                                         Modal.handleLoginModal();
-                                    
+                                        
                                     }, 2000);
                                 })
                                 .catch(err => console.log(err));

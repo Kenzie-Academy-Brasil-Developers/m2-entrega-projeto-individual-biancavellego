@@ -105,6 +105,27 @@ export class Dashboard {
         });
     }
 
+    static handleLogout() {
+    
+        const navBarLogoutButton = document.querySelector(".nav__button__logout");
+        const menuLogoutButton   = document.querySelector(".logout__button");
+
+        navBarLogoutButton.addEventListener("click", () => {
+        
+            localStorage.clear();
+            window.location.replace('../home/index.html');
+        
+        });
+
+        menuLogoutButton.addEventListener("click", () => {
+        
+            localStorage.clear();
+            window.location.replace('../home/index.html');
+        
+        });
+    
+    }
+
 }
 
 Dashboard.renderDashboard();
@@ -112,3 +133,4 @@ Dashboard.handleDarkMode();
 Dashboard.handleProfileMenu();
 Dashboard.handleProfileMenuOptions();
 Dashboard.handleDesktopMenu();
+Dashboard.handleLogout();

@@ -1,5 +1,4 @@
 import { Api } from "./api.js";
-
 export class Modal {
 
     static loginForm() {
@@ -179,7 +178,7 @@ export class Modal {
                 Modal.closeModal();
                 Modal.handleLoginModal();
                 Modal.redirect();
-
+                
                 const mainSection  = document.querySelectorAll("section");
 
                 if(mainSection.length > 1) {
@@ -192,6 +191,7 @@ export class Modal {
                 }
             });
         });
+        
     }
 
     static showSignUpModal() {
@@ -345,6 +345,4 @@ export class Modal {
 
         });
     }
-
-    
 }

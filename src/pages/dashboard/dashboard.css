@@ -104,7 +104,8 @@ h1 {
 
 .nav__menu:hover {
     transition: .5;
-    filter: invert(100%);
+    color: var(--black);
+    background-color: var(--white);
 }
 
 .fa-user-tie {
@@ -277,7 +278,7 @@ footer p {
 
     .nav__button__container--desktop .button:hover {
         /*BIG MENU BUTTONS!*/
-        
+
     }
 
     .nav__button__container--desktop .button i {
