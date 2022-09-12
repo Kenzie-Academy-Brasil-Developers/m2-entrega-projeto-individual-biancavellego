@@ -132,6 +132,7 @@ h1 {
     width: 50%;
     max-width: 300px;
     z-index: 1;
+    box-shadow: 5px 5px 10px var(--black);
 }
 
 .nav__button__container button {
@@ -149,10 +150,6 @@ h1 {
     border-style: none;
     border-bottom: 1px solid var(--grey);
     transition: .5s;
-}
-
-.admin {
-
 }
 
 .nav__button__container button:hover {
@@ -187,6 +184,12 @@ h1 {
     transition: .5s;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 865px;
+}
 
 main ul {
     display: flex;
@@ -211,7 +214,7 @@ footer {
     justify-content: flex-end;
     gap: .5rem;
     width: 100%;
-    height: 200px;
+    height: 100%;
     color: var(--white);
     background-color: var(--black);
     font-size: .7rem;
@@ -228,12 +231,26 @@ footer p {
 }
 
 .hidden {
-    display: block;
+    display: none;
 }
+
+.hiddenOptions li {
+    display: none;
+}
+
+.admin {
+    display: none !important;
+    display: flex !important;
+}
+
 /*******************************************************************************************************************************************/
 /********************************************************DESKTOP INTERFACE******************************************************************/
 /*******************************************************************************************************************************************/
 @media (min-width: 768px) {
+
+    .hiddenMobile {
+        display: none !important;
+    }
 
     .nav__button__container--desktop {
         display: block;
@@ -244,11 +261,7 @@ footer p {
         max-width: 600px;
     }
 
-    .nav__button__container--desktop {
-        position: relative;
-    }
-
-    .nav__button__container--desktop button {
+    .nav__button__container--desktop .button {
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -259,51 +272,105 @@ footer p {
         width: 150px;
         font-size: 1rem;
         border: none;
+        z-index: 2;
     }
 
-    .nav__button__container--desktop button:hover {
-        transition: .5s;
-        filter: invert(90%);
+    .nav__button__container--desktop .button:hover {
+        /*BIG MENU BUTTONS!*/
+        
     }
 
-    .nav__button__container--desktop button i {
+    .nav__button__container--desktop .button i {
         color: var(--grey);
     
     }
     
     .company__button--desktop {
-        
+        position: relative;
     }
 
     .company__button--desktop ul {
+        position: absolute;
+        top: 125px;
+        left: 0px;
+        color: var(--title-color);
+        background-color: var(--dash-menu-content);
+        font-size: .9rem;
+        font-weight: 600;
+        width: 100%;
+        z-index: 2;
+        box-shadow: 5px 5px 10px var(--black);
+    }
 
+    .company__button--desktop ul li {
+        padding: 15px 10px;
+        border-bottom: 2px solid var(--black);
+    }
+
+    .company__button--desktop ul li:hover {
+        color: var(--white);
+        background-color: var(--dash-dark-toggle-ball);
+        transition: .5s;
     }
 
     .sectors__button--desktop {
-
+        position: relative;
     }
 
     .sectors__button--desktop ul {
-        
+        position: absolute;
+        top: 125px;
+        left: 0px;
+        color: var(--title-color);
+        background-color: var(--dash-menu-content);
+        font-size: .9rem;
+        font-weight: 600;
+        width: 100%;
+        z-index: 2;
+        box-shadow: 5px 5px 10px var(--black);
+    }
+
+    .sectors__button--desktop ul li {
+        padding: 15px 10px;
+        border-bottom: 2px solid var(--black);
+    }
+
+    .sectors__button--desktop ul li:hover {
+        color: var(--white);
+        background-color: var(--dash-dark-toggle-ball);
+        transition: .5s;
     }
 
     .department__button--desktop {
-
+        position: relative;
     
     }
 
     .department__button--desktop ul {
-        
+        position: absolute;
+        top: 125px;
+        left: 0px;
+        color: var(--title-color);
+        background-color: var(--dash-menu-content);
+        font-size: .9rem;
+        font-weight: 600;
+        min-width: 250px;
+        z-index: 2;
+        box-shadow: 5px 5px 10px var(--black);
     }
 
-    .mobile {
-        display: none;
-    
+    .department__button--desktop ul li {
+        padding: 15px 10px;
+        border-bottom: 2px solid var(--black);
+    }
+
+    .department__button--desktop ul li:hover {
+        color: var(--white);
+        background-color: var(--dash-dark-toggle-ball);
+        transition: .5s;
     }
 
 }
-
-
 
 /*******************************************************************************************************************************************/
 /***********************************************************MODALS**************************************************************************/

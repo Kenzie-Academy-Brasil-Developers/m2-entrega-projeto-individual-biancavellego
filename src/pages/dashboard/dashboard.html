@@ -32,16 +32,18 @@
             </div>
 <!----------------------------------------------------DESKTOP ONLY VERSION------------------------------------------------------------------>
             <div class="nav__button__container--desktop">
-                <button class="company__button--desktop" type="button">Company<i class="fa-solid fa-building"></i></button>
-                    <ul class="company__button__options">
+                <div class="company__button--desktop button" type="button">Company<i class="fa-solid fa-building"></i>
+                    <ul class="company__button__options--desktop hidden">
                         <li class="register__company">Register Company</li>
                     </ul>
-                <button class="sectors__button--desktop" type="button">Sectors<i class="fa-solid fa-industry"></i></button>
-                    <ul class="sectors__button__options">
+                </div>
+                <div class="sectors__button--desktop button" type="button">Sectors<i class="fa-solid fa-industry"></i>
+                    <ul class="sectors__button__options--desktop hidden">
                         <li class="list__all__sectors">All Sectors</li>
                     </ul>
-                <button class="department__button--desktop" type="button">Department<i class="fa-solid fa-building-circle-arrow-right"></i></button>
-                    <ul class="department__button__options">
+                </div>
+                <div class="department__button--desktop button" type="button">Department<i class="fa-solid fa-building-circle-arrow-right"></i>
+                    <ul class="department__button__options--desktop hidden">
                         <li class="all__departments">All Departments</li>
                         <li class="departments__by__company">Departments by Company</li>
                         <li class="create__department">Create Department</li>
@@ -50,7 +52,8 @@
                         <li class="edit__department">Edit Department</li>
                         <li class="delete__department">Delete Department</li>
                     </ul>
-                <button class="nav__button__logout" type="button">Logout<i class="fa-solid fa-arrow-right-from-bracket"></i></button>
+                </div>
+                <div class="nav__button__logout button" type="button">Logout<i class="fa-solid fa-arrow-right-from-bracket"></i></div>
             </div>
 <!----------------------------------------------------MOBILE & DESKTOP VERSIONS-------------------------------------------------------------->
             <button class="nav__menu" type="button">
@@ -62,16 +65,16 @@
                 <button class="your__departments__button" type="button">Your Departments<i class="fa-solid fa-building-user"></i></button>
                 <button class="your__coworkers__button" type="button">Your Coworkers<i class="fa-solid fa-people-group"></i></button>
                 <button class="all__users__button" type="button">All Users<i class="fa-solid fa-users-viewfinder"></i></button>
-                <button class="company__button mobile" type="button">Company<i class="fa-solid fa-building"></i></button>
-                    <ul class="company__button__options hidden">
+                <button class="company__button hiddenMobile" type="button">Company<i class="fa-solid fa-building"></i></button>
+                    <ul class="company__button__options hiddenMobile hiddenOptions">
                         <li class="register__company">Register Company</li>
                     </ul>
-                <button class="sectors__button mobile" type="button">Sectors<i class="fa-solid fa-industry"></i></button>
-                    <ul class="sectors__button__options hidden">
+                <button class="sectors__button hiddenMobile" type="button">Sectors<i class="fa-solid fa-industry"></i></button>
+                    <ul class="sectors__button__options hiddenMobile hiddenOptions">
                         <li class="list__all__sectors">All Sectors</li>
                     </ul>
-                <button class="department__button mobile" type="button">Department<i class="fa-solid fa-building-circle-arrow-right"></i></button>
-                    <ul class="department__button__options hidden">
+                <button class="department__button hiddenMobile" type="button">Department<i class="fa-solid fa-building-circle-arrow-right"></i></button>
+                    <ul class="department__button__options hiddenMobile hiddenOptions">
                        <li class="all__departments">All Departments</li>
                        <li class="departments__by__company">Departments by Company</li>
                        <li class="create__department">Create Department</li>
@@ -80,9 +83,9 @@
                        <li class="edit__department">Edit Department</li>
                        <li class="delete__department">Delete Department</li>
                     </ul>
-                <button class="no__department__button admin hidden" type="button">No Department<i class="fa-solid fa-building-circle-xmark"></i></button>
-                <button class="update__user__button admin hidden" type="button">Update User<i class="fa-solid fa-user-pen"></i></button>
-                <button class="delete__user__button admin hidden" type="button">Delete User<i class="fa-solid fa-user-large-slash"></i></i></button>
+                <button class="no__department__button admin" type="button">No Department<i class="fa-solid fa-building-circle-xmark"></i></button>
+                <button class="update__user__button admin" type="button">Update User<i class="fa-solid fa-user-pen"></i></button>
+                <button class="delete__user__button admin" type="button">Delete User<i class="fa-solid fa-user-large-slash"></i></i></button>
                 <button class="logout__button" type="button">Logout<i class="fa-solid fa-arrow-right-from-bracket"></i></button>
             </div>
         </nav>
