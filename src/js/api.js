@@ -298,6 +298,13 @@ export class Api {
                                        .then(resp => {
                                  
                                             console.log(resp);
+                                            if(resp.error) {
+                                            
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
+
+                                            Toast.create("Success! User data updated.", "linear-gradient(to right, #00b09b, #96c93d)");
                                             return resp;
 
                                         })
@@ -317,6 +324,13 @@ export class Api {
                                        .then(resp => {
                                  
                                             console.log(resp);
+                                            if(resp.error) {
+                                            
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
+
+                                            Toast.create("Success! User deleted.", "linear-gradient(to right, #00b09b, #96c93d)");
                                             return resp;
 
                                         })

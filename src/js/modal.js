@@ -725,7 +725,7 @@ export class Modal {
         });
     }
 
-    static deleteUserForm() {
+    static deleteUserAdminForm() {
     
         const sectionDeletedmin = document.createElement("section");
         const form              = document.createElement("form");
@@ -763,9 +763,69 @@ export class Modal {
 
     }
 
-    static handleDeleteUser() {
+    static async handleDeleteUserAdmin() {
     
+        const allUsers  = await Api.listAllEmployees();
+        const selectTag = document.querySelector("#form__select__delete");
+
+        allUsers.forEach(user => {
+            
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__user__delete");
+            optionTag.innerText = user.username;
+            selectTag.append(optionTag);
         
-    
+        });
+
+        selectTag.addEventListener("click", async (event) => {
+            
+            const selectedUser = event.target.value;
+
+            allUsers.forEach(async (user) => {
+
+                if(selectedUser === user.username) {
+                    console.log(user.uuid)
+                    
+                    const uuid = user.uuid;
+                    await Modal.showDeleteUserAdmin(uuid);
+                }
+            });
+        });
+        
     }
+
+    static async showDeleteUserAdmin(uuid) {
+        
+        const main                 = document.querySelector("main");
+        const deleteUserButtonMenu = document.querySelector(".delete__user__button");
+        const modalDeleteButton    = document.querySelector(".form__button");
+
+        deleteUserButtonMenu.addEventListener("click", () => {
+        
+            const sectionUpdateForm = Modal.deleteUserAdminForm();
+            main.append(sectionUpdateForm);
+            Modal.handleDeleteUserAdmin();
+            Modal.closeModal();
+
+            const mainSection = document.querySelectorAll("section");
+
+             if(mainSection.length > 1) {
+      
+                mainSection.forEach(elem => {
+          
+                    elem.remove();
+          
+                });
+            }
+        });
+
+        modalDeleteButton.addEventListener("click", () => {
+        
+            Api.deleteUser(uuid);
+        
+        });
+    }
+
+    static 
+
 }

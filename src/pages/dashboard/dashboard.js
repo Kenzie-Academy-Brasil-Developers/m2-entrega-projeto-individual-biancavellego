@@ -377,3 +377,4 @@ Modal.showStandardUserUpdate();
 Dashboard.renderAllEmployees();
 Dashboard.renderNoDepartmentUsers();
 Modal.showAdminUserUpdate();
+Modal.showDeleteUserAdmin();
