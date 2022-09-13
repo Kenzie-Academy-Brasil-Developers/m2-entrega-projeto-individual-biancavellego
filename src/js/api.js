@@ -148,42 +148,53 @@ export class Api {
 
     }
 
-    static async allUsersCoworkersDepartment() {
-    
+    static async allUserCoworkersDepartment() {
 
-        const userDepartmentCoworkers = await fetch(`${this.ulrBase}departments/coworkers`, {
-                                            method: "GET",
-                                            headers: this.headers
-                                        })
-                                        .then(resp => resp.json())
-                                        .then(resp => {
+        const userDepartmentCoworkers = await fetch(`${this.ulrBase}users/departments/coworkers`, {
+                                                    method: "GET",
+                                                    headers: this.headers
+                                                })
+                                                .then(resp => resp.json())
+                                                .then(resp => {
                                   
-                                            console.log(resp);
-                                            return resp;
+                                                    console.log(resp)
+                                                    if(resp.error) {
+                                                    
+                                                        return Toast.create(resp.error, "red");
+                                                    
+                                                    }
 
-                                        })
-                                        .catch(err => console.log(err));
+                                                    return resp;
+                    
+                                                })
+                                                .catch(err => console.log(err));
 
         return userDepartmentCoworkers;
     
     }
 
-    static async allUsersCompanyDepartments() {
+    static async allUserCompanyDepartments() {
     
-        const usersCompanyDepartments = await fetch(`${this.ulrBase}departments`, {
+        const userCompanyDepartments = await fetch(`${this.ulrBase}users/departments`, {
                                             method: "GET",
                                             headers: this.headers
                                         })
                                         .then(resp => resp.json())
                                         .then(resp => {
-                                  
+                                        
                                             console.log(resp);
+                                            if(resp.error) {
+                                                    
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
+                                            
                                             return resp;
 
                                         })
                                         .catch(err => console.log(err));
 
-        return usersCompanyDepartments;
+        return userCompanyDepartments;
     
     }
 

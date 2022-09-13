@@ -257,6 +257,7 @@ main {
     margin: 10px 0px;
     border: 1px solid white;
     overflow-y: auto;
+    background-color: rgb(0, 0, 0, 0.5);
 }
 
 .main__list__container li {
