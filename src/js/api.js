@@ -188,7 +188,7 @@ export class Api {
                                                 return Toast.create(resp.error, "red");
                                             
                                             }
-                                            
+
                                             return resp;
 
                                         })
@@ -209,7 +209,21 @@ export class Api {
                                        .then(resp => {
                                  
                                             console.log(resp);
-                                            return resp;
+                                            if(resp.error) {
+                                            
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
+
+                                            const standardUpdateModal = document.querySelector(".form__user__standard__update");
+                                            
+                                            setTimeout(()=> {
+                                        
+                                                standardUpdateModal.remove();
+                                                
+                                            }, 2000);
+
+                                            Toast.create("Success! You updated your data.", "linear-gradient(to right, #00b09b, #96c93d)");
 
                                         })
                                         .catch(err => console.log(err));
@@ -232,6 +246,11 @@ export class Api {
                                        .then(resp => {
                                  
                                             console.log(resp);
+                                            if(resp.error) {
+                                            
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
                                             return resp;
 
                                         })

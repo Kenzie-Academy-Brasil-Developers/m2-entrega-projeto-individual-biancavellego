@@ -286,18 +286,12 @@ export class Dashboard {
         });
     }
 
-    static async renderUserUpdate() {
+    static allEmployees() {
     
-        const updateUserButton = document.querySelector(".update__user__button");
-
-        // "username":"bertold",
-        // "email": "bertoldo2@mail.com",
-        // "password": "11"
-
-        updateUserData(data);
-
+        
     
     }
+
 }
 
 Dashboard.renderDashboard();
@@ -310,3 +304,4 @@ Dashboard.renderUserInfo();
 Dashboard.resetScreen();
 Dashboard.renderAllCoworkers();
 Dashboard.renderUserDepartments();
+Modal.showStandardUserUpdate();

@@ -173,7 +173,7 @@ export class Modal {
         
             element.addEventListener("click", () => {
             
-                const sectionLogin  = Modal.loginForm();
+                const sectionLogin = Modal.loginForm();
                 main.append(sectionLogin);
                 Modal.closeModal();
                 Modal.handleLoginModal();
@@ -209,7 +209,7 @@ export class Modal {
                 Modal.handleSignUpModal();
                 Modal.redirect();
 
-                const mainSection  = document.querySelectorAll("section");
+                const mainSection = document.querySelectorAll("section");
 
                 if(mainSection.length > 1) {
                 
@@ -345,4 +345,110 @@ export class Modal {
 
         });
     }
+
+    static standardUserUpdateForm() {
+    
+        const sectionStandardUpdate = document.createElement("section");
+        const form                  = document.createElement("form");
+        const divTitle              = document.createElement("div");
+        const tagH1                 = document.createElement("h1");
+        const tagFontAwesome        = document.createElement("i");
+        const divInput              = document.createElement("div");
+        const labelNewUsername      = document.createElement("label");
+        const inputNewUsername      = document.createElement("input");
+        const labelEmail            = document.createElement("label");
+        const inputEmail            = document.createElement("input");
+        const labelPassword         = document.createElement("label");
+        const inputPassword         = document.createElement("input"); 
+        const button                = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionStandardUpdate.classList.add("form__container", "form__user__standard__update");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divInput.classList.add("form__modal__container");
+        inputNewUsername.setAttribute("id", "form__username__update");
+        inputEmail.setAttribute("id", "form__email__update");
+        inputPassword.setAttribute("id", "form__password__update");
+        button.classList.add("form__button");
+
+        labelNewUsername.setAttribute("for", "username");
+        inputNewUsername.setAttribute("type", "text");
+        inputNewUsername.setAttribute("title", "Username");
+        inputNewUsername.setAttribute("name", "username");
+        labelEmail.setAttribute("for", "email");
+        inputEmail.setAttribute("type", "text");
+        inputEmail.setAttribute("title", "E-mail");
+        inputEmail.setAttribute("name", "email");
+        labelPassword.setAttribute("for", "email");
+        inputPassword.setAttribute("type", "password");
+        inputPassword.setAttribute("title", "Password");
+        inputPassword.setAttribute("name", "password");
+        button.setAttribute("type", "button");
+
+        tagH1.innerText              = "Update Your Data";
+        labelNewUsername.innerText   = "New User Name:";
+        inputNewUsername.placeholder = "Type your user name here...";
+        labelEmail.innerText         = "New E-mail:";
+        inputEmail.placeholder       = "Type your email here...";
+        labelPassword.innerText      = "New Password:";
+        inputPassword.placeholder    = "Type password here...";
+        button.innerText             = "Update Data";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divInput.append(labelNewUsername, inputNewUsername, labelEmail, inputEmail, labelPassword, inputPassword, button);
+        divInput.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divInput);
+        sectionStandardUpdate.append(form);
+
+        return sectionStandardUpdate;
+    
+    }
+
+    static showStandardUserUpdate() {
+        
+        const main             = document.querySelector("main");
+        const updateUserButton = document.querySelector(".update__user__button");
+
+        updateUserButton.addEventListener("click", () => {
+        
+            const sectionUpdateForm = Modal.standardUserUpdateForm();
+            main.append(sectionUpdateForm);
+            Modal.closeModal();
+            Modal.handleStandardUserUpdate();
+
+            const mainSection = document.querySelectorAll("section");
+
+             if(mainSection.length > 1) {
+      
+                mainSection.forEach(elem => {
+          
+                    elem.remove();
+          
+                });
+            }
+        });
+    }
+
+    static handleStandardUserUpdate() {
+
+        const inputNewUsername = document.querySelector("#form__username__update");
+        const inputEmail       = document.querySelector("#form__email__update");
+        const inputPassword    = document.querySelector("#form__password__update");
+        const updateButton     = document.querySelector(".form__button");
+        
+        updateButton.addEventListener("click", () => {
+
+            const data = {
+                "username": inputNewUsername.value,
+                "email": inputEmail.value,
+                "password": inputPassword.value,
+            }
+
+            Api.updateUserData(data);
+
+        });
+    }
+
 }
