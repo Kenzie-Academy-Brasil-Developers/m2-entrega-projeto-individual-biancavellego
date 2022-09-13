@@ -612,22 +612,23 @@ export class Modal {
         allUsers.forEach(user => {
             
             const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__user__update");
             optionTag.innerText = user.username;
             selectTag.append(optionTag);
         
         });
 
-        selectTag.addEventListener("click", (event) => {
+        selectTag.addEventListener("click", async (event) => {
             
             const selectedUser = event.target.value;
 
-            allUsers.forEach(async (user) => {
-                
-                if(selectedUser === user.username) {
-                    
-                    const uuid = await user.uuid;
-                    Modal.handleAdminUserUpdate(uuid);
+            allUsers.forEach((user) => {
 
+                if(selectedUser === user.username) {
+                    console.log(user.uuid)
+                    
+                    const uuid = user.uuid;
+                    
                 }
             });
         });
@@ -663,7 +664,7 @@ export class Modal {
             
             }else if(inputIntern.checked) {
             
-                proLevelSelected = "estagiário";
+                proLevelSelected = "estagiario";
         
             }else if(inputJunior.checked) {
                 
@@ -688,6 +689,11 @@ export class Modal {
                 "professional_level": proLevelSelected,
             }
 
+           //REMOVER VALORES DA TAG ADD EVENT LISTENER!!!!!!!! INSERIR FUNÇÕES DENTRO DE UMA NOVA TAG (QUE É O BOTAO UPDATE) COM ADDEVENTLISTENER COM OS VALORES
+           //CAPTURADOS E DÊ RETURN EM DATA (BODY) PARA REAPROVEITÁ-LO NA OUTRA FUNÇÃO ACIMA...
+
+            const uuid = await Modal.handleAdminUserUpdateSelect();
+            console.log(uuid); //FUNCIONA APENAS AO CLICAR, MAS NÃO GUARDA VALOR ALGUM NA VARIÁVEL...
             await Api.updateEmployeeDataAdmin(data, uuid);
 
         });
@@ -717,5 +723,49 @@ export class Modal {
                 });
             }
         });
+    }
+
+    static deleteUserForm() {
+    
+        const sectionDeletedmin = document.createElement("section");
+        const form              = document.createElement("form");
+        const divTitle          = document.createElement("div");
+        const tagH1             = document.createElement("h1");
+        const tagFontAwesome    = document.createElement("i");
+        const divSelect         = document.createElement("div");
+        const labelSelectUser   = document.createElement("label");
+        const tagSelect         = document.createElement("select");
+        const deleteButton      = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionDeletedmin.classList.add("form__container", "form__delete");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divSelect.classList.add("form__modal__container");
+        labelSelectUser.setAttribute("for", "select");
+        tagSelect.setAttribute("id", "form__select__delete");
+        tagSelect.setAttribute("required", "");
+        deleteButton.classList.add("form__button");
+        deleteButton.setAttribute("type", "button");
+        
+        tagH1.innerText           = "Delete User";
+        labelSelectUser.innerText = "Select a user to delete:";
+        deleteButton.innerText    = "Delete User";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divSelect.append(labelSelectUser, tagSelect, deleteButton);
+        divSelect.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divSelect);
+        sectionDeletedmin.append(form);
+        
+        return sectionDeletedmin;
+
+    }
+
+    static handleDeleteUser() {
+    
+        
+    
     }
 }
