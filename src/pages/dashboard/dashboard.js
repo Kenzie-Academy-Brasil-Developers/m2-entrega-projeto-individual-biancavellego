@@ -164,12 +164,14 @@ export class Dashboard {
             const username       = document.createElement("p");
             const email          = document.createElement("p");
             const proLevel       = document.createElement("p");
-            const kindofWork     = document.createComment("p");
+            const kindofWork     = document.createElement("p");
+            const isAdmin        = document.createElement("p");
 
-            username.innerText   = `Username: ${await userInfo.username}`;
-            email.innerText      = `Email: ${await userInfo.email}`;
-            proLevel.innerText   = `Professional Level: ${await userInfo.professional_level}`;
-            kindofWork.innerText = `Job: ${await userInfo.kind_of_work}`;
+            username.innerText   = `Username: ${userInfo.username}`;
+            email.innerText      = `Email: ${userInfo.email}`;
+            proLevel.innerText   = `Professional Level: ${userInfo.professional_level}`;
+            kindofWork.innerText = `Job: ${userInfo.kind_of_work}`;
+            isAdmin.innerText    = `Is Admin: ${userInfo.is_admin}`;
 
             liContainer.append(username, email, proLevel, email, kindofWork, kindofWork);
             ulContainerMain.append(liContainer);
@@ -286,10 +288,75 @@ export class Dashboard {
         });
     }
 
-    static allEmployees() {
+    static async renderAllEmployees() {
     
+        const ulContainerMain = document.querySelector(".main__list__container");
+        const allUsersButton  = document.querySelector(".all__users__button");
+
+        allUsersButton.addEventListener("click", async () => {
         
+            const allUsers = await Api.listAllEmployees();
+            ulContainerMain.classList.toggle("hidden");
+            ulContainerMain.innerHTML = "";
+
+            allUsers.forEach(user => {
+            
+                const userCards = Dashboard.userCardGenerator(user);
+                ulContainerMain.append(userCards);
+            
+            });
+        });
+    }
+
+    static async renderNoDepartmentUsers() {
     
+        const ulContainerMain    = document.querySelector(".main__list__container");
+        const noDepartmentButton = document.querySelector(".no__department__button");
+
+        noDepartmentButton.addEventListener("click", async () => {
+            
+            const noDepartmentUsers = await Api.noDepartmentUsers();
+            ulContainerMain.classList.toggle("hidden");
+            ulContainerMain.innerHTML = "";
+
+            noDepartmentUsers.forEach(user => {
+                
+                const userCards = Dashboard.userCardGenerator(user);
+                ulContainerMain.append(userCards);
+            
+            });
+        });
+    }
+
+    static userCardGenerator(eachUser) {
+        
+        const liContainer = document.createElement("li");
+            
+        // "uuid": "b4808e91-fc8b-433b-b372-36b2d222888a",
+        // "username": "ADMIN",
+        // "email": "admin@mail.com",
+        // "password": "$2a$08$NAsa8GwVgqY8EuM.1ocBC.ea3p3hFwm8UgidwzKcLgee3s7P9WgfG",
+        // "professional_level": "junior",
+        // "kind_of_work": "home office",
+        // "is_admin": true,
+        // "department_uuid": null
+
+        const username    = document.createElement("p");
+        const email       = document.createElement("p");
+        const proLevel    = document.createElement("p");
+        const kindOfWork  = document.createElement("p");
+        const isAdmin     = document.createElement("p");
+
+        username.innerText   = `Username: ${eachUser.username}`;
+        email.innerText      = `E-mail: ${eachUser.email}`;
+        proLevel.innerText   = `Professional Level: ${eachUser.professional_level}`;
+        kindOfWork.innerText = `Job Type: ${eachUser.kind_of_work}`;
+        isAdmin.innerText    = `Is Admin: ${eachUser.is_admin}`;
+
+        liContainer.append(username, email, proLevel, kindOfWork, isAdmin);
+
+        return liContainer;
+
     }
 
 }
@@ -305,3 +372,5 @@ Dashboard.resetScreen();
 Dashboard.renderAllCoworkers();
 Dashboard.renderUserDepartments();
 Modal.showStandardUserUpdate();
+Dashboard.renderAllEmployees();
+Dashboard.renderNoDepartmentUsers();

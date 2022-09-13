@@ -264,7 +264,7 @@ export class Modal {
                 
                 modal.remove();
             
-            }, 1000);
+            }, 500);
         });
     }
 
@@ -449,6 +449,17 @@ export class Modal {
             Api.updateUserData(data);
 
         });
+    }
+
+    static adminUserUpdateForm() {
+        
+        // '{
+        //     "kind_of_work": "presencial",
+        //     "professional_level": "pleno"
+        //   }'
+
+        
+    
     }
 
 }

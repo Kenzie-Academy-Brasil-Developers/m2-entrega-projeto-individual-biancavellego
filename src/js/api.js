@@ -273,6 +273,11 @@ export class Api {
                                        .then(resp => {
                                  
                                             console.log(resp);
+                                            if(resp.error) {
+                                            
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
                                             return resp;
 
                                         })
