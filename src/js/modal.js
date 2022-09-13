@@ -452,14 +452,270 @@ export class Modal {
     }
 
     static adminUserUpdateForm() {
-        
-        // '{
-        //     "kind_of_work": "presencial",
-        //     "professional_level": "pleno"
-        //   }'
 
+        const sectionUpdateAdmin    = document.createElement("section");
+        const form                  = document.createElement("form");
+        const divTitle              = document.createElement("div");
+        const tagH1                 = document.createElement("h1");
+        const tagFontAwesome        = document.createElement("i");
+        const divSelect             = document.createElement("div");
+        const labelSelectUser       = document.createElement("label");
+        const tagSelect             = document.createElement("select");
+        const divJobType            = document.createElement("div");
+        const labelJobType          = document.createElement("label");
+        const divRegisterContainer1 = document.createElement("div");
+        const divRadioContainer1    = document.createElement("div");
+        const labelWorkFromHome     = document.createElement("label");
+        const inputWorkFromHome     = document.createElement("input");
+        const divRadioContainer2    = document.createElement("div");
+        const labelHybrid           = document.createElement("label");
+        const inputHybrid           = document.createElement("input");
+        const divRadioContainer3    = document.createElement("div");
+        const labelOnSite           = document.createElement("label");
+        const inputOnSite           = document.createElement("input");
+        const labelProLevel         = document.createElement("label");
+        const formRegisterContainer2 = document.createElement("form");
+        const divInputContainer1    = document.createElement("div");
+        const labelIntern           = document.createElement("label");
+        const inputIntern           = document.createElement("input");
+        const divInputContainer2    = document.createElement("div");
+        const labelJunior           = document.createElement("label");
+        const inputJunior           = document.createElement("input");
+        const divInputContainer3    = document.createElement("div");
+        const labelMid              = document.createElement("label");
+        const inputMid              = document.createElement("input");
+        const divInputContainer4    = document.createElement("div");
+        const labelSenior           = document.createElement("label");
+        const inputSenior           = document.createElement("input");
+        const spanErrorMessage      = document.createElement("span");
+        const updateDataButton      = document.createElement("button");
+        const tagP                  = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+
+        sectionUpdateAdmin.classList.add("form__container", "form__admin__user__update");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divSelect.classList.add("form__modal__container");
+        labelSelectUser.setAttribute("for", "users");
+        tagSelect.setAttribute("name", "users");
+        tagSelect.setAttribute("id", "select__user__update");
+        tagSelect.setAttribute("title", "users");
+        tagSelect.setAttribute("required", "");
+        divJobType.classList.add("form__modal__container");
+        labelJobType.setAttribute("for", "select__job__type");
+        divRegisterContainer1.classList.add("form__register__container");
+        divRadioContainer1.classList.add("form__register__proLevel__container");
+        labelWorkFromHome.setAttribute("for", "work__from__home");
+        inputWorkFromHome.setAttribute("type", "radio");
+        inputWorkFromHome.setAttribute("id", "work__from__home");
+        inputWorkFromHome.setAttribute("title", "Job Type");
+        inputWorkFromHome.setAttribute("name", "professional_level");
+        inputWorkFromHome.setAttribute("value", "work__from__home");
+        inputWorkFromHome.setAttribute("required", "");
+        divRadioContainer2.classList.add("form__register__proLevel__container");
+        labelHybrid.setAttribute("for", "hybrid");
+        inputHybrid.setAttribute("type", "radio");
+        inputHybrid.setAttribute("id", "hybrid");
+        inputHybrid.setAttribute("title", "Job Type");
+        inputHybrid.setAttribute("name", "professional_level");
+        inputHybrid.setAttribute("value", "hybrid");
+        inputHybrid.setAttribute("required", "");
+        divRadioContainer3.classList.add("form__register__proLevel__container");
+        labelOnSite.setAttribute("for", "on__site");
+        inputOnSite.setAttribute("type", "radio");
+        inputOnSite.setAttribute("id", "on__site");
+        inputOnSite.setAttribute("title", "Job Type");
+        inputOnSite.setAttribute("name", "professional_level");
+        inputOnSite.setAttribute("value", "on__site");
+        inputOnSite.setAttribute("required", "");
+        labelProLevel.setAttribute("for", "text");
+        formRegisterContainer2.classList.add("form__register__container");
+        divInputContainer1.classList.add("form__register__proLevel__container");
+        labelIntern.setAttribute("for", "intern");
+        inputIntern.setAttribute("type", "radio");
+        inputIntern.setAttribute("id", "intern");
+        inputIntern.setAttribute("title", "Professional level");
+        inputIntern.setAttribute("name", "professional_level");
+        inputIntern.setAttribute("value", "intern");
+        inputIntern.setAttribute("required", "");
+        divInputContainer2.classList.add("form__register__proLevel__container");
+        labelJunior.setAttribute("for", "text");
+        inputJunior.setAttribute("type", "radio");
+        inputJunior.setAttribute("title", "Professional level");
+        inputJunior.setAttribute("name", "professional_level");
+        inputJunior.setAttribute("value", "Junior");
+        inputJunior.setAttribute("required", "");
+        divInputContainer3.classList.add("form__register__proLevel__container");
+        labelMid.setAttribute("for", "text");
+        inputMid.setAttribute("type", "radio");
+        inputMid.setAttribute("title", "Professional level");
+        inputMid.setAttribute("name", "professional_level");
+        inputMid.setAttribute("value", "Mid-Level");
+        inputMid.setAttribute("required", "");
+        divInputContainer4.classList.add("form__register__proLevel__container");
+        labelSenior.setAttribute("for", "text");
+        inputSenior.setAttribute("type", "radio");
+        inputSenior.setAttribute("title", "Professional level");
+        inputSenior.setAttribute("name", "professional_level");
+        inputSenior.setAttribute("value", "Senior");
+        inputSenior.setAttribute("required", "");
+        spanErrorMessage.classList.add("form__error__message");
+        updateDataButton.classList.add("form__button");
+        updateDataButton.setAttribute("type", "button");
         
+        tagH1.innerText             = "Update User (Admins Only)";
+        labelSelectUser.innerText   = "Select user to update:";
+        labelJobType.innerText      = "Select user's job type:";
+        labelWorkFromHome.innerText = "Work from home";
+        labelHybrid.innerText       = "Hybrid";
+        labelOnSite.innerText       = "On-site";
+        labelProLevel.innerText     = "Select user's professional level:";
+        labelIntern.innerText       = "Intern";
+        labelJunior.innerText       = "Junior";
+        labelMid.innerText          = "Mid-Level";
+        labelSenior.innerText       = "Senior";
+        spanErrorMessage.innerText  = "";
+        updateDataButton.innerText    = "Update Data";
+
+        divTitle.append(tagH1, tagFontAwesome);
+
+        divRegisterContainer1.append(divRadioContainer1, divRadioContainer2, divRadioContainer3);
+        formRegisterContainer2.append(divInputContainer1, divInputContainer2, divInputContainer3, divInputContainer4, spanErrorMessage, updateDataButton);
+        
+        divRadioContainer1.append(labelWorkFromHome, inputWorkFromHome);
+        divRadioContainer2.append(labelHybrid, inputHybrid);
+        divRadioContainer3.append(labelOnSite, inputOnSite);
+
+        divInputContainer1.append(labelIntern, inputIntern);
+        divInputContainer2.append(labelJunior, inputJunior);
+        divInputContainer3.append(labelMid, inputMid);
+        divInputContainer4.append(labelSenior, inputSenior);
+
+
+        divSelect.append(labelSelectUser, tagSelect);
+        divJobType.append(labelJobType, divRegisterContainer1, labelProLevel, formRegisterContainer2);
+        
+        divJobType.insertAdjacentHTML("beforeend", tagP);
+        
+        form.append(divTitle, divSelect, divJobType);
+        sectionUpdateAdmin.append(form);
+
+        return sectionUpdateAdmin;
     
     }
 
+    static async handleAdminUserUpdateSelect() {
+        
+        const allUsers  = await Api.listAllEmployees();
+        const selectTag = document.querySelector("#select__user__update");
+
+        allUsers.forEach(user => {
+            
+            const optionTag = document.createElement("option");
+            optionTag.innerText = user.username;
+            selectTag.append(optionTag);
+        
+        });
+
+        selectTag.addEventListener("click", (event) => {
+            
+            const selectedUser = event.target.value;
+
+            allUsers.forEach(async (user) => {
+                
+                if(selectedUser === user.username) {
+                    
+                    const uuid = await user.uuid;
+                    Modal.handleAdminUserUpdate(uuid);
+
+                }
+            });
+        });
+    }
+
+    static async handleAdminUserUpdate(uuid) {
+
+        const inputWorkFromHome = document.querySelector("#work__from__home");
+        const inputHybrid       = document.querySelector("#hybrid");        
+        const inputOnSite       = document.querySelector("#on__site");     
+        const inputIntern       = document.querySelector("#intern");
+        const inputJunior       = document.querySelector("#junior");
+        const inputMidLevel     = document.querySelector("#mid-level");
+        const inputSenior       = document.querySelector("#senior");
+        const updateDataButton  = document.querySelector(".form__button");
+        const spanErrorMessage  = document.querySelector(".error__password");
+        let   jobTypeSelected;
+        let   proLevelSelected;
+
+        updateDataButton.addEventListener("click", async () => {
+
+            if(inputWorkFromHome.checked) {
+            
+                jobTypeSelected = "home office";
+            
+            }else if(inputHybrid.checked) {
+            
+                jobTypeSelected = "híbrido";
+            
+            }else if(inputOnSite.checked) {
+            
+                jobTypeSelected = "presencial";
+            
+            }else if(inputIntern.checked) {
+            
+                proLevelSelected = "estagiário";
+        
+            }else if(inputJunior.checked) {
+                
+                proLevelSelected = "júnior";
+
+            }else if(inputMidLevel.checked) {
+                
+                proLevelSelected = "pleno";
+            
+            }else if(inputSenior.checked) {
+            
+                proLevelSelected = "sênior";
+            
+            } else {
+            
+                spanErrorMessage.innerText = "Please, select an option above.";
+            
+            }
+
+            const data = {
+                "kind_of_work": jobTypeSelected,
+                "professional_level": proLevelSelected,
+            }
+
+            await Api.updateEmployeeDataAdmin(data, uuid);
+
+        });
+    }
+
+    static showAdminUserUpdate() {
+    
+        const main             = document.querySelector("main");
+        const updateDataButton = document.querySelector(".update__user__button__admin");
+
+        updateDataButton.addEventListener("click", () => {
+        
+            const sectionUpdateForm = Modal.adminUserUpdateForm();
+            main.append(sectionUpdateForm);
+            Modal.closeModal();
+            Modal.handleAdminUserUpdateSelect();
+            Modal.handleAdminUserUpdate();
+
+            const mainSection = document.querySelectorAll("section");
+
+             if(mainSection.length > 1) {
+      
+                mainSection.forEach(elem => {
+          
+                    elem.remove();
+          
+                });
+            }
+        });
+    }
 }

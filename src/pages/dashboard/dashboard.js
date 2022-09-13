@@ -359,6 +359,8 @@ export class Dashboard {
 
     }
 
+    
+
 }
 
 Dashboard.renderDashboard();
@@ -374,3 +376,4 @@ Dashboard.renderUserDepartments();
 Modal.showStandardUserUpdate();
 Dashboard.renderAllEmployees();
 Dashboard.renderNoDepartmentUsers();
+Modal.showAdminUserUpdate();

@@ -508,7 +508,23 @@ label {
 }
 
 .form__handle {
+    display: flex;
     cursor: pointer;
     text-decoration: underline;
     color: var(--white);
+   
+}
+
+.form__register__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.form__register__container div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    align-self: center;
 }

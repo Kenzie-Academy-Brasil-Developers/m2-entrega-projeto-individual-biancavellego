@@ -61,5 +61,57 @@
             </div>
         </form>
     </section>
+<!--------------------------------------------------------------UPDATE USER ADMIN MODAL--------------------------------------------------------------->
+    <section class="form__container form__admin__user__update">
+        <form class="form__modal">
+            <div class="form__title__container">
+                <h1>Update User (Admins Only)</h1>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div class="form__modal__container">
+                <label for="users">Select user to update:</label>
+                <select name="users" id="select__user__update" title="users" required></select>
+            </div>
+            <div class="form__modal__container">
+                <label for="select__job__type">Select user's job type:</label>
+                <div class="form__register__container">
+                    <div class="form__register__proLevel__container">
+                        <label for="Work from home">Work from home</label>
+                        <input type="radio" id="work__from__home" title="Job Type" name="professional_level" value="work__from__home" required>
+                    </div>
+                    <div class="form__register__proLevel__container">
+                        <label for="hybrid">Hybrid</label>
+                        <input type="radio" id="hybrid" title="Job Type" name="professional_level" value="hybrid" required>
+                    </div>
+                    <div class="form__register__proLevel__container">
+                        <label for="on__site">On-site</label>
+                        <input type="radio" id="on__site" title="Job Type" name="professional_level" value="on__site" required>
+                    </div>
+                </div>
+                <label>Select user's professional level:</label>
+                <div class="form__register__container">
+                    <div class="form__register__proLevel__container">
+                        <label for="intern">intern</label>
+                        <input type="radio" id="intern" title="Professional level" name="professional_level" value="intern" required>
+                    </div>
+                    <div class="form__register__proLevel__container">
+                        <label for="Junior">Junior</label>
+                        <input type="radio" id="junior" title="Professional level" name="professional_level" value="Junior" required>
+                    </div>
+                    <div class="form__register__proLevel__container">
+                        <label for="Mid-Level">Mid-Level</label>
+                        <input type="radio" id="mid-level" title="Professional level" name="professional_level" value="Mid-Level" required>
+                    </div>
+                    <div class="form__register__proLevel__container">
+                        <label for="Senior">Senior</label>
+                        <input type="radio" id="senior" title="Professional level" name="professional_level" value="Senior" required>
+                    </div>
+                    <span class="form__error__message"></span>
+                </div>
+                <button class="form__button" type="button">Update Data</button>
+                <p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>
+            </div>
+        </form>
+    </section>
 </body>
 </html>
