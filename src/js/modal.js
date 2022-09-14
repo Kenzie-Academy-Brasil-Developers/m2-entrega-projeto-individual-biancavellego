@@ -233,8 +233,6 @@ export class Modal {
         redirect.forEach(element => {
 
             element.addEventListener("click", () => {
-            
-                console.log(element.closest("section").className);
 
                 if(element.closest("section").className.includes("form__login")) {
             
@@ -785,7 +783,6 @@ export class Modal {
             allUsers.forEach(async (user) => {
 
                 if(selectedUser === user.username) {
-                    console.log(user.uuid)
                     
                     uuid = await user.uuid;
                 }
@@ -1292,7 +1289,6 @@ export class Modal {
         let   userUuid;
         let   departmentUuid;
 
-        console.log(selectUserTag)
         noDepartmentUsers.forEach(async (unemployed) => {
 
             const optionTag = document.createElement("option");
@@ -1439,7 +1435,6 @@ export class Modal {
 
                 if(selectedUser === user.username) {
                     
-                    console.log(user.uuid);
                     uuid = await user.uuid;
                 }
             });
@@ -1554,7 +1549,6 @@ export class Modal {
 
                 if(selectedDepartment === department.name) {
                     
-                    console.log(department.uuid);
                     uuid = await department.uuid;
                 }
             });
@@ -1662,7 +1656,6 @@ export class Modal {
 
                 if(selectedDepartment === department.name) {
                     
-                    console.log(department.uuid);
                     uuid = await department.uuid;
                 }
             });
