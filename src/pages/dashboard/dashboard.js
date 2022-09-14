@@ -10,7 +10,7 @@ export class Dashboard {
 
         if(!this.token) {
         
-            window.location.replace("../home/index.html");
+            window.location.replace("../../../index.html");
             
         }
 
@@ -119,14 +119,14 @@ export class Dashboard {
         navBarLogoutButton.addEventListener("click", () => {
         
             localStorage.clear();
-            window.location.replace('../home/index.html');
+            window.location.replace('../../../index.html');
         
         });
 
         menuLogoutButton.addEventListener("click", () => {
         
             localStorage.clear();
-            window.location.replace('../home/index.html');
+            window.location.replace('../../../index.html');
         
         });
     }

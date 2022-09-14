@@ -106,7 +106,7 @@ export class HomePage {
             element.addEventListener("click", () => {
                                     
                 localStorage.clear();
-                window.location.replace('../home/index.html');
+                window.location.replace('../../../index.html');
                                 
             });
         });

@@ -274,7 +274,7 @@ export class Modal {
 
         if(token) {
         
-            window.location.replace("../dashboard/dashboard.html");
+            window.location.replace("../pages/dashboard/dashboard.html");
         
         }
 

@@ -34,7 +34,7 @@ export class Api {
 
                                     setTimeout(() => {
                                         
-                                        window.location.replace("../dashboard/dashboard.html");
+                                        window.location.replace("src/pages/dashboard/dashboard.html");
                                         
                                     }, 1000);
                                 })
