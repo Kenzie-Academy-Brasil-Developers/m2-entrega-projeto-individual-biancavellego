@@ -295,16 +295,6 @@ export class Dashboard {
     static userCardGenerator(eachUser) {
         
         const liContainer = document.createElement("li");
-            
-        // "uuid": "b4808e91-fc8b-433b-b372-36b2d222888a",
-        // "username": "ADMIN",
-        // "email": "admin@mail.com",
-        // "password": "$2a$08$NAsa8GwVgqY8EuM.1ocBC.ea3p3hFwm8UgidwzKcLgee3s7P9WgfG",
-        // "professional_level": "junior",
-        // "kind_of_work": "home office",
-        // "is_admin": true,
-        // "department_uuid": null
-
         const username    = document.createElement("p");
         const email       = document.createElement("p");
         const proLevel    = document.createElement("p");
@@ -326,24 +316,27 @@ export class Dashboard {
     static async renderAllSectors() {
 
         const ulContainerMain  = document.querySelector(".main__list__container");
-        const allSectorsButton = document.querySelector(".list__all__sectors");
+        const allSectorsButton = document.querySelectorAll(".list__all__sectors");
 
-        allSectorsButton.addEventListener("click", async () => {
+        allSectorsButton.forEach(element => {
             
-            const allSectors = await Api.listAllSectors();
-            ulContainerMain.classList.remove("hidden");
-            ulContainerMain.innerHTML = "";
-
-            allSectors.forEach(sector => {
-                
-                const liContainer = document.createElement("li");
-                const description = document.createElement("p");
+            element.addEventListener("click", async () => {
+            
+                const allSectors = await Api.listAllSectors();
+                ulContainerMain.classList.remove("hidden");
+                ulContainerMain.innerHTML = "";
     
-                description.innerText = `Sector: ${sector.description}`;
-
-                liContainer.append(description);
-                ulContainerMain.append(liContainer);
-            
+                allSectors.forEach(sector => {
+                    
+                    const liContainer = document.createElement("li");
+                    const description = document.createElement("p");
+        
+                    description.innerText = `Sector: ${sector.description}`;
+    
+                    liContainer.append(description);
+                    ulContainerMain.append(liContainer);
+                
+                });
             });
         });
     }
@@ -351,30 +344,30 @@ export class Dashboard {
     static renderAllDepartments() {
     
         const ulContainerMain      = document.querySelector(".main__list__container");
-        const allDepartmentsButton = document.querySelector(".all__departments");
+        const allDepartmentsButton = document.querySelectorAll(".all__departments");
 
-        allDepartmentsButton.addEventListener("click", async () => {
+        allDepartmentsButton.forEach(element => {
+
+            element.addEventListener("click", async () => {
             
-            const allDepartments = await Api.listAllDepartments();
-            ulContainerMain.classList.remove("hidden");
-            ulContainerMain.innerHTML = "";
-
-            allDepartments.forEach(department => {
-                
-                const liContainer = document.createElement("li");
-                const description = document.createElement("p");
+                const allDepartments = await Api.listAllDepartments();
+                ulContainerMain.classList.remove("hidden");
+                ulContainerMain.innerHTML = "";
     
-                description.innerText = `Department: ${department.description}`;
-
-                liContainer.append(description);
-                ulContainerMain.append(liContainer);
-            
+                allDepartments.forEach(department => {
+                    
+                    const liContainer = document.createElement("li");
+                    const description = document.createElement("p");
+        
+                    description.innerText = `Department: ${department.description}`;
+    
+                    liContainer.append(description);
+                    ulContainerMain.append(liContainer);
+                
+                });
             });
         });
     }
-
-
-
 }
 
 Dashboard.renderDashboard();

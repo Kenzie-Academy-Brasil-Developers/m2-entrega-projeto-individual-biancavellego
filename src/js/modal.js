@@ -1077,25 +1077,28 @@ export class Modal {
     static showAllCompanyDepartments() {
     
         const main                       = document.querySelector("main");
-        const departmentsByCompanyButton = document.querySelector(".departments__by__company");
+        const departmentsByCompanyButton = document.querySelectorAll(".departments__by__company");
 
-        departmentsByCompanyButton.addEventListener("click", async () => {
+        departmentsByCompanyButton.forEach(element => {
         
-            const sectionDepartmentsForm = Modal.allCompanyDepartmentsForm();
-            main.append(sectionDepartmentsForm);
-            Modal.closeModal();
-            await Modal.handleAllCompanyDepartments();
+            element.addEventListener("click", async () => {
+            
+                const sectionDepartmentsForm = Modal.allCompanyDepartmentsForm();
+                main.append(sectionDepartmentsForm);
+                Modal.closeModal();
+                await Modal.handleAllCompanyDepartments();
 
-            const mainSection = document.querySelectorAll("section");
+                const mainSection = document.querySelectorAll("section");
 
-             if(mainSection.length > 1) {
-      
-                mainSection.forEach(elem => {
-          
-                    elem.remove();
-          
-                });
-            }
+                 if(mainSection.length > 1) {
+                
+                    mainSection.forEach(elem => {
+                    
+                        elem.remove();
+                    
+                    });
+                }
+            });
         });
     }
 
@@ -1204,25 +1207,28 @@ export class Modal {
     static async showCreateDepartment() {
         
         const main                   = document.querySelector("main");
-        const createDepartmentButton = document.querySelector(".create__department");
+        const createDepartmentButton = document.querySelectorAll(".create__department");
         
-        createDepartmentButton.addEventListener("click", async () => {
+            createDepartmentButton.forEach(element => {
             
-                const sectionLogin = Modal.createDepartmentForm();
-                main.append(sectionLogin);
-                Modal.closeModal();
-                await Modal.handleCreateDepartment();
+                element.addEventListener("click", async () => {
                 
-                const mainSection = document.querySelectorAll("section");
+                    const sectionLogin = Modal.createDepartmentForm();
+                    main.append(sectionLogin);
+                    Modal.closeModal();
+                    await Modal.handleCreateDepartment();
 
-                if(mainSection.length > 1) {
-                
-                    mainSection.forEach(elem => {
+                    const mainSection = document.querySelectorAll("section");
+
+                    if(mainSection.length > 1) {
                     
-                        elem.remove();
-                    
-                });
-            }
+                        mainSection.forEach(elem => {
+                        
+                            elem.remove();
+                        
+                    });
+                }
+            });
         });
     }
 
