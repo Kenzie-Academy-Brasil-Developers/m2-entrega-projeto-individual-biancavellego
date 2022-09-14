@@ -324,11 +324,6 @@ footer p {
         z-index: 3;
     }
 
-    .nav__button__container--desktop .button:hover {
-        /*BIG MENU BUTTONS!*/
-        
-    }
-
     .nav__button__container--desktop .button i {
         color: var(--grey);
     
