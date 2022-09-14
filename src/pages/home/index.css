@@ -279,7 +279,7 @@ footer {
     justify-content: flex-end;
     gap: .5rem;
     width: 100%;
-    height: 200px;
+    height: 300px;
     color: var(--white);
     background-color: var(--black);
     font-size: .7rem;
@@ -454,8 +454,8 @@ footer p {
 /*****************************************************************************************************************************************/
 .form__container {
     position: absolute;
-    top: 50%;
-    bottom: 35%;;
+    top: 200px;
+    bottom: 50px;
     left: 0;
     right: 0;
     margin: auto;
