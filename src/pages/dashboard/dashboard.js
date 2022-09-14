@@ -400,3 +400,4 @@ Modal.showCreateDepartment();
 Modal.showHireEmployee();
 Modal.showFireEmployee();
 Modal.showEditDepartment();
+Modal.showDeleteDepartment();

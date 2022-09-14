@@ -1567,10 +1567,10 @@ export class Modal {
 
     static showEditDepartment() {
     
-        const main               = document.querySelector("main");
-        const hireEmployeeButton = document.querySelectorAll(".edit__department");
+        const main                 = document.querySelector("main");
+        const editDepartmentButton = document.querySelectorAll(".edit__department");
 
-        hireEmployeeButton.forEach(element => {
+        editDepartmentButton.forEach(element => {
         
             element.addEventListener("click", async () => {
             
@@ -1593,4 +1593,107 @@ export class Modal {
         });
     }
 
+    static deleteDepartmentForm() {
+    
+        const sectionFire             = document.createElement("section");
+        const form                    = document.createElement("form");
+        const divTitle                = document.createElement("div");
+        const tagH1                   = document.createElement("h1");
+        const tagFontAwesome          = document.createElement("i");
+        const divSelect               = document.createElement("div");
+        const labelSelectDepartment   = document.createElement("label");
+        const tagSelectDepartment     = document.createElement("select");
+        const deleteDepartmentButton  = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionFire.classList.add("form__container", "form__delete__department");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divSelect.classList.add("form__modal__container");
+        labelSelectDepartment.setAttribute("for", "select");
+        tagSelectDepartment.setAttribute("id", "form__select__delete__department");
+        tagSelectDepartment.setAttribute("required", "");
+        deleteDepartmentButton.classList.add("form__button");
+        deleteDepartmentButton.setAttribute("type", "button");
+        
+        tagH1.innerText                  = "Delete Department";
+        labelSelectDepartment.innerText  = "Select a Department to Delete:";
+        deleteDepartmentButton.innerText = "Delete";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divSelect.append(labelSelectDepartment, tagSelectDepartment, deleteDepartmentButton);
+        divSelect.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divSelect);
+        sectionFire.append(form);
+        
+        return sectionFire;
+        
+    }
+
+    static async handleDeleteDepartment() {
+    
+        const allDepartments         = await Api.listAllDepartments();
+        const selectTag              = document.querySelector("#form__select__delete__department");
+        const formDeleteDepartment   = document.querySelector(".form__delete__department");
+        const deleteDepartmentButton = document.querySelector(".form__button");
+        let uuid;
+
+        allDepartments.forEach(department => {
+            
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__department__delete");
+            optionTag.innerText = department.name;
+            selectTag.append(optionTag);
+        
+        });
+
+        formDeleteDepartment.addEventListener("click", async (event) => {
+            
+            const selectedDepartment = event.target.value;
+
+            allDepartments.forEach(async (department) => {
+
+                if(selectedDepartment === department.name) {
+                    
+                    console.log(department.uuid);
+                    uuid = await department.uuid;
+                }
+            });
+
+            if(deleteDepartmentButton === event.target) {
+            
+                await Api.deleteDepartment(uuid);
+            
+            }
+        });
+    }
+
+    static async showDeleteDepartment() {
+        
+        const main                 = document.querySelector("main");
+        const editDepartmentButton = document.querySelectorAll(".delete__department");
+
+        editDepartmentButton.forEach(element => {
+        
+            element.addEventListener("click", async () => {
+                
+                const sectionFire = await Modal.deleteDepartmentForm();
+                main.append(sectionFire);
+                Modal.closeModal();
+                await Modal.handleDeleteDepartment();
+                
+                const mainSection = document.querySelectorAll("section");
+
+                if(mainSection.length > 1) {
+                
+                    mainSection.forEach(elem => {
+                    
+                        elem.remove();
+                    
+                    });
+                }
+            });
+        });
+    }
 }
