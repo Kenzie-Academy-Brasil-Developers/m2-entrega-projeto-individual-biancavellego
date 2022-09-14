@@ -251,6 +251,7 @@ export class Api {
                                                 return Toast.create(resp.error, "red");
                                             
                                             }
+                                            
                                             return resp;
 
                                         })
@@ -319,7 +320,7 @@ export class Api {
                                            method: "DELETE",
                                            headers: this.headers,
                                        })
-                                       .then(resp => resp.json())
+                                       .then(resp => resp)
                                        .then(resp => {
                                  
                                             console.log(resp);
@@ -329,7 +330,7 @@ export class Api {
                                             
                                             }
 
-                                            return Toast.create("Success! User deleted.", "linear-gradient(to right, #00b09b, #96c93d)");
+                                            Toast.create("Success! User deleted.", "linear-gradient(to right, #00b09b, #96c93d)");
 
                                         })
                                         .catch(err => console.log(err));

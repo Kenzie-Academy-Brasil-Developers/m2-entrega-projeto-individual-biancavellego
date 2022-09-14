@@ -763,8 +763,11 @@ export class Modal {
 
     static async handleDeleteUserAdmin() {
     
-        const allUsers  = await Api.listAllEmployees();
-        const selectTag = document.querySelector("#form__select__delete");
+        const allUsers     = await Api.listAllEmployees();
+        const formDelete   = document.querySelector(".form__delete");
+        const selectTag    = document.querySelector("#form__select__delete");
+        const deleteButton = document.querySelector(".form__button");
+        let uuid;
 
         allUsers.forEach(user => {
             
@@ -775,7 +778,7 @@ export class Modal {
         
         });
 
-        selectTag.addEventListener("click", async (event) => {
+        formDelete.addEventListener("click", async (event) => {
             
             const selectedUser = event.target.value;
 
@@ -784,12 +787,16 @@ export class Modal {
                 if(selectedUser === user.username) {
                     console.log(user.uuid)
                     
-                    const uuid = user.uuid;
-                    await Modal.userDeletionAdmin(uuid);
+                    uuid = await user.uuid;
                 }
             });
+
+            if(deleteButton === event.target) {
+            
+                await Api.deleteUser(uuid);
+            
+            }
         });
-        
     }
 
     static async showDeleteUserAdmin() {
@@ -802,7 +809,6 @@ export class Modal {
             const sectionUpdateForm = Modal.deleteUserAdminForm();
             main.append(sectionUpdateForm);
             await Modal.handleDeleteUserAdmin();
-            await Modal.userDeletionAdmin();
             Modal.closeModal();
 
             const mainSection = document.querySelectorAll("section");
@@ -816,18 +822,6 @@ export class Modal {
                 });
             }
         });
-    }
-
-    static userDeletionAdmin(uuid) {
-        
-        const modalDeleteButton = document.querySelector(".form__button");
-
-        modalDeleteButton.addEventListener("click", () => {
-        
-            Api.deleteUser(uuid);
-        
-        });
-    
     }
 
     static registerCompanyForm() {
@@ -1414,10 +1408,42 @@ export class Modal {
     
     }
 
-    static handleFireEmployee() {
+    static async handleFireEmployee() {
     
-        
+        const allUsers  = await Api.listAllEmployees();
+        const selectTag = document.querySelector("#form__select__fire");
+        const formHire  = document.querySelector(".form__fire");
+        const fireButton = document.querySelector(".form__button");
+        let uuid;
 
+        allUsers.forEach(user => {
+            
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__user__delete");
+            optionTag.innerText = user.username;
+            selectTag.append(optionTag);
+        
+        });
+
+        formHire.addEventListener("click", async (event) => {
+            
+            const selectedUser = event.target.value;
+
+            allUsers.forEach(async (user) => {
+
+                if(selectedUser === user.username) {
+                    
+                    console.log(user.uuid);
+                    uuid = await user.uuid;
+                }
+            });
+
+            if(fireButton === event.target) {
+            
+                await Api.fireEmployee(uuid);
+            
+            }
+        });
     }
 
     static showFireEmployee() {
@@ -1446,7 +1472,8 @@ export class Modal {
                 }
             });
         });
-    
     }
+
+
 
 }
