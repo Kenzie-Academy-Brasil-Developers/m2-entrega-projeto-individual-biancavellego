@@ -1410,9 +1410,9 @@ export class Modal {
 
     static async handleFireEmployee() {
     
-        const allUsers  = await Api.listAllEmployees();
-        const selectTag = document.querySelector("#form__select__fire");
-        const formHire  = document.querySelector(".form__fire");
+        const allUsers   = await Api.listAllEmployees();
+        const selectTag  = document.querySelector("#form__select__fire");
+        const formHire   = document.querySelector(".form__fire");
         const fireButton = document.querySelector(".form__button");
         let uuid;
 
@@ -1474,6 +1474,123 @@ export class Modal {
         });
     }
 
+    static editDepartmentForm() {
+    
+        const sectionEditDepartment = document.createElement("section");
+        const form                  = document.createElement("form");
+        const divTitle              = document.createElement("div");
+        const tagH1                 = document.createElement("h1");
+        const tagFontAwesome        = document.createElement("i");
+        const divSelect             = document.createElement("div");
+        const labelSelectDepartment = document.createElement("label");
+        const selectDepartment      = document.createElement("select");
+        const labelEditDepartment   = document.createElement("label");
+        const inputEditDepartment   = document.createElement("input");
+        const button                = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionEditDepartment.classList.add("form__container", "form__edit__department");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divSelect.classList.add("form__modal__container");
+        selectDepartment.setAttribute("id", "form__select__edit__department");
+        inputEditDepartment.setAttribute("id", "form__input_edit__department");
+        button.classList.add("form__button");
 
+        labelSelectDepartment.setAttribute("for", "department");
+        selectDepartment.setAttribute("title", "Select Department");
+        selectDepartment.setAttribute("required", "");
+        labelEditDepartment.setAttribute("for", "department");
+        inputEditDepartment.setAttribute("title", "Edit Department");
+        inputEditDepartment.setAttribute("required", "");
+        button.setAttribute("type", "button");
+
+        tagH1.innerText                 = "Edit Department";
+        labelSelectDepartment.innerText = "Select Department to Edit: ";
+        labelEditDepartment.innerText   = "Edit Department:";
+        button.innerText                = "Edit";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divSelect.append(labelSelectDepartment, selectDepartment, labelEditDepartment, inputEditDepartment, button);
+        divSelect.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divSelect);
+        
+        sectionEditDepartment.append(form);
+
+        return sectionEditDepartment;
+    
+    }
+
+    static async handleEditDepartment() {
+    
+        const allDepartments = await Api.listAllDepartments();
+        const selectTag      = document.querySelector("#form__select__edit__department");
+        const userInput      = document.querySelector("#form__input_edit__department");
+        const formHire       = document.querySelector(".form__edit__department");
+        const fireButton     = document.querySelector(".form__button");
+        let uuid;
+
+        allDepartments.forEach(department => {
+            
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__user__delete");
+            optionTag.innerText = department.name;
+            selectTag.append(optionTag);
+        
+        });
+
+        formHire.addEventListener("click", async (event) => {
+            
+            const selectedDepartment = event.target.value;
+
+            allDepartments.forEach(async (department) => {
+
+                if(selectedDepartment === department.name) {
+                    
+                    console.log(department.uuid);
+                    uuid = await department.uuid;
+                }
+            });
+
+            if(fireButton === event.target) {
+
+                const data = {
+                    "description": userInput.value,
+                }
+            
+                await Api.editDepartment(data, uuid);
+            
+            }
+        });
+    }
+
+    static showEditDepartment() {
+    
+        const main               = document.querySelector("main");
+        const hireEmployeeButton = document.querySelectorAll(".edit__department");
+
+        hireEmployeeButton.forEach(element => {
+        
+            element.addEventListener("click", async () => {
+            
+                const sectionFire = await Modal.editDepartmentForm();
+                main.append(sectionFire);
+                Modal.closeModal();
+                await Modal.handleEditDepartment();
+                
+                const mainSection = document.querySelectorAll("section");
+
+                if(mainSection.length > 1) {
+                
+                    mainSection.forEach(elem => {
+                    
+                        elem.remove();
+                    
+                    });
+                }
+            });
+        });
+    }
 
 }

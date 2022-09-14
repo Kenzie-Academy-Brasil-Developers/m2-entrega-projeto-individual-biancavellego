@@ -530,9 +530,9 @@ export class Api {
     
     }
 
-    static async editDepartment(data, uuidCompany) {
+    static async editDepartment(data, uuidDepartment) {
 
-        const editingDepartment = await fetch(`${this.ulrBase}departments/${uuidCompany}`, {
+        const editingDepartment = await fetch(`${this.ulrBase}departments/${uuidDepartment}`, {
                                             method: "PATCH",
                                             headers: this.headers,
                                             body: JSON.stringify(data)
@@ -541,6 +541,13 @@ export class Api {
                                         .then(resp => {
                                  
                                             console.log(resp);
+                                            if(resp.error) {
+                                            
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
+    
+                                            Toast.create("Success! Department edited.", "linear-gradient(to right, #00b09b, #96c93d)");
                                             return resp;
 
                                         })
@@ -550,13 +557,13 @@ export class Api {
 
     }
 
-    static async deleteDepartment(uuidCompany) {
+    static async deleteDepartment(uuidDepartment) {
 
-        const deletingDepartment = await fetch(`${this.ulrBase}departments/${uuidCompany}`, {
+        const deletingDepartment = await fetch(`${this.ulrBase}departments/${uuidDepartment}`, {
                                                 method: "DELETE",
                                                 headers: this.headers,
                                             })
-                                            .then(resp => resp.json())
+                                            .then(resp => resp)
                                             .then(resp => {
                                  
                                                 console.log(resp);

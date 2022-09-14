@@ -399,3 +399,4 @@ Modal.showAllCompanyDepartments();
 Modal.showCreateDepartment();
 Modal.showHireEmployee();
 Modal.showFireEmployee();
+Modal.showEditDepartment();
