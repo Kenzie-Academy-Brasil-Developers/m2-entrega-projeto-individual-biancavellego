@@ -305,7 +305,6 @@ export class Api {
                                             }
 
                                             Toast.create("Success! User data updated.", "linear-gradient(to right, #00b09b, #96c93d)");
-                                            return resp;
 
                                         })
                                         .catch(err => console.log(err));
@@ -330,8 +329,7 @@ export class Api {
                                             
                                             }
 
-                                            Toast.create("Success! User deleted.", "linear-gradient(to right, #00b09b, #96c93d)");
-                                            return resp;
+                                            return Toast.create("Success! User deleted.", "linear-gradient(to right, #00b09b, #96c93d)");
 
                                         })
                                         .catch(err => console.log(err));
@@ -346,7 +344,7 @@ export class Api {
 
 /***************************************************************COMPANY********************************************************************/
 
-    static async subscribeCompany(data) {
+    static async registerCompany(data) {
 
       const subscribingCompany = await fetch(`${this.ulrBase}companies`, {
                                            method: "POST",
@@ -357,7 +355,13 @@ export class Api {
                                         .then(resp => {
                                  
                                             console.log(resp);
-                                            return resp;
+                                            if(resp.error) {
+                                            
+                                                Toast.create(resp.error, "red");
+                                            
+                                            }
+
+                                            Toast.create("Success! Company registered.", "linear-gradient(to right, #00b09b, #96c93d)");
 
                                         })
                                         .catch(err => console.log(err));
@@ -378,6 +382,12 @@ export class Api {
                                 .then(resp => {
                                  
                                     console.log(resp);
+                                    if(resp.error) {
+                                            
+                                        return Toast.create(resp.error, "red");
+                                    
+                                    }
+
                                     return resp;
 
                                 })
@@ -399,6 +409,12 @@ export class Api {
                                         .then(resp => {
                                  
                                             console.log(resp);
+                                            if(resp.error) {
+                                                
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
+
                                             return resp;
 
                                         })
@@ -408,9 +424,9 @@ export class Api {
     
     }
 
-    static async listAllCompaniesDepartments(chosenCompany, uuidCompany) {
+    static async listAllCompanyDepartments(uuidCompany) {
         
-        const allDepartmentsCompany = await fetch(`${this.ulrBase}departments/${chosenCompany}/${uuidCompany}`, {
+        const allDepartmentsCompany = await fetch(`${this.ulrBase}departments/${uuidCompany}`, {
                                                 method: "GET",
                                                 headers: this.headers,
                                             })
@@ -418,6 +434,12 @@ export class Api {
                                             .then(resp => {
                                  
                                                 console.log(resp);
+                                                if(resp.error) {
+                                                
+                                                    return Toast.create(resp.error, "red");
+                                                
+                                                }
+
                                                 return resp;
 
                                             })
@@ -438,6 +460,13 @@ export class Api {
                                         .then(resp => {
                                  
                                             console.log(resp);
+                                            if(resp.error) {
+                                            
+                                                return Toast.create(resp.error, "red");
+                                            
+                                            }
+
+                                            Toast.create("Success! Department created.", "linear-gradient(to right, #00b09b, #96c93d)");
                                             return resp;
 
                                         })
@@ -445,7 +474,6 @@ export class Api {
 
         return createRequest;
     
-
     }
 
     static async hireEmployee(data) {
@@ -459,6 +487,13 @@ export class Api {
                                     .then(resp => {
                                  
                                         console.log(resp);
+                                        if(resp.error) {
+                                        
+                                            return Toast.create(resp.error, "red");
+                                        
+                                        }
+
+                                        Toast.create("Success! Employee hired.", "linear-gradient(to right, #00b09b, #96c93d)");
                                         return resp;
 
                                     })
@@ -478,6 +513,13 @@ export class Api {
                                     .then(resp => {
                                  
                                         console.log(resp);
+                                        if(resp.error) {
+                                        
+                                            return Toast.create(resp.error, "red");
+                                        
+                                        }
+
+                                        Toast.create("You're fired! >:(", "linear-gradient(to right, #00b09b, #96c93d)");
                                         return resp;
 
                                     })

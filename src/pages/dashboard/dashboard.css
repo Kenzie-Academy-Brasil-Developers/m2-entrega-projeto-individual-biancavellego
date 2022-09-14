@@ -132,7 +132,7 @@ h1 {
     min-width: 220px;
     width: 50%;
     max-width: 300px;
-    z-index: 1;
+    z-index: 2;
     box-shadow: 5px 5px 10px var(--black);
 }
 
@@ -186,6 +186,7 @@ h1 {
 }
 
 main {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -210,7 +211,7 @@ main img {
 
 .main__list__container {
     position: absolute;
-    top: 125px;
+    top: 0px;
     bottom: 0;
     right: 50%;
     transform: translateX(50%);
@@ -218,7 +219,7 @@ main img {
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 90%;
     height: 100%;
     max-height: 480px;
@@ -238,6 +239,21 @@ main img {
 .main__list__container li p {
     font-weight: 700;
     margin: 5px;
+}
+
+.fa-arrow-rotate-left {
+    position: absolute;
+    right: 10%;
+    bottom: 50%;
+    color: var(--white);
+    transform: scale(2);
+    z-index: 1;
+    transition: .5s;
+}
+
+.fa-arrow-rotate-left:hover {
+    transform: scale(2.5);
+    transition: .5s;
 }
 
 footer {
@@ -305,12 +321,12 @@ footer p {
         font-size: 1rem;
         font-weight: 600;
         border: none;
-        z-index: 2;
+        z-index: 3;
     }
 
     .nav__button__container--desktop .button:hover {
         /*BIG MENU BUTTONS!*/
-
+        
     }
 
     .nav__button__container--desktop .button i {
@@ -388,7 +404,6 @@ footer p {
         font-size: .9rem;
         font-weight: 600;
         min-width: 250px;
-        z-index: 2;
         box-shadow: 5px 5px 10px var(--black);
     }
 
@@ -410,8 +425,8 @@ footer p {
 /*******************************************************************************************************************************************/
 .form__container {
     position: absolute;
-    top: 100px;
-    bottom: 0;
+    top: 0;
+    bottom: 50%;
     left: 0;
     right: 0;
     margin: auto;
@@ -527,4 +542,17 @@ label {
     justify-content: space-between;
     align-items: flex-end;
     align-self: center;
+}
+
+.form__error__message {
+    font-weight: 700;
+    margin: 5px 0px;
+    padding: 5px;
+    font-size: .8rem;
+    color: red;
+}
+
+.form__admin__user__update .form__button {
+    margin: 10px 0px;
+
 }

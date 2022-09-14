@@ -1,5 +1,8 @@
 import { Api } from "./api.js";
+import { Toast } from "./toast.js";
 export class Modal {
+
+    static isAdmin = localStorage.getItem("@kenzieEnterprises:is_admin");
 
     static loginForm() {
 
@@ -191,7 +194,6 @@ export class Modal {
                 }
             });
         });
-        
     }
 
     static showSignUpModal() {
@@ -543,23 +545,22 @@ export class Modal {
         inputJunior.setAttribute("type", "radio");
         inputJunior.setAttribute("title", "Professional level");
         inputJunior.setAttribute("name", "professional_level");
-        inputJunior.setAttribute("value", "Junior");
+        inputJunior.setAttribute("id", "junior");
         inputJunior.setAttribute("required", "");
         divInputContainer3.classList.add("form__register__proLevel__container");
         labelMid.setAttribute("for", "text");
         inputMid.setAttribute("type", "radio");
         inputMid.setAttribute("title", "Professional level");
         inputMid.setAttribute("name", "professional_level");
-        inputMid.setAttribute("value", "Mid-Level");
+        inputMid.setAttribute("id", "mid-level");
         inputMid.setAttribute("required", "");
         divInputContainer4.classList.add("form__register__proLevel__container");
         labelSenior.setAttribute("for", "text");
         inputSenior.setAttribute("type", "radio");
         inputSenior.setAttribute("title", "Professional level");
         inputSenior.setAttribute("name", "professional_level");
-        inputSenior.setAttribute("value", "Senior");
+        inputSenior.setAttribute("id", "senior");
         inputSenior.setAttribute("required", "");
-        spanErrorMessage.classList.add("form__error__message");
         updateDataButton.classList.add("form__button");
         updateDataButton.setAttribute("type", "button");
         
@@ -574,13 +575,12 @@ export class Modal {
         labelJunior.innerText       = "Junior";
         labelMid.innerText          = "Mid-Level";
         labelSenior.innerText       = "Senior";
-        spanErrorMessage.innerText  = "";
-        updateDataButton.innerText    = "Update Data";
+        updateDataButton.innerText  = "Update Data";
 
         divTitle.append(tagH1, tagFontAwesome);
 
         divRegisterContainer1.append(divRadioContainer1, divRadioContainer2, divRadioContainer3);
-        formRegisterContainer2.append(divInputContainer1, divInputContainer2, divInputContainer3, divInputContainer4, spanErrorMessage, updateDataButton);
+        formRegisterContainer2.append(divInputContainer1, divInputContainer2, divInputContainer3, divInputContainer4, updateDataButton);
         
         divRadioContainer1.append(labelWorkFromHome, inputWorkFromHome);
         divRadioContainer2.append(labelHybrid, inputHybrid);
@@ -590,7 +590,6 @@ export class Modal {
         divInputContainer2.append(labelJunior, inputJunior);
         divInputContainer3.append(labelMid, inputMid);
         divInputContainer4.append(labelSenior, inputSenior);
-
 
         divSelect.append(labelSelectUser, tagSelect);
         divJobType.append(labelJobType, divRegisterContainer1, labelProLevel, formRegisterContainer2);
@@ -606,8 +605,10 @@ export class Modal {
 
     static async handleAdminUserUpdateSelect() {
         
-        const allUsers  = await Api.listAllEmployees();
-        const selectTag = document.querySelector("#select__user__update");
+        const allUsers         = await Api.listAllEmployees();
+        const selectTag        = document.querySelector("#select__user__update");
+        const formUpdate       = document.querySelector(".form__admin__user__update");
+        const updateDataButton = document.querySelector(".form__button");
 
         allUsers.forEach(user => {
             
@@ -618,23 +619,32 @@ export class Modal {
         
         });
 
-        selectTag.addEventListener("click", async (event) => {
-            
+        let data;
+        let uuid;
+
+        formUpdate.addEventListener("click", async (event) => {
+
             const selectedUser = event.target.value;
 
-            allUsers.forEach((user) => {
+            allUsers.forEach(async (user) => {
 
                 if(selectedUser === user.username) {
-                    console.log(user.uuid)
                     
-                    const uuid = user.uuid;
+                    data = await Modal.handleAdminUserUpdate();
+                    uuid = user.uuid;
                     
                 }
             });
+
+            if(updateDataButton === event.target) {
+            
+                await Api.updateEmployeeDataAdmin(data, uuid);
+            
+            }
         });
     }
 
-    static async handleAdminUserUpdate(uuid) {
+    static async handleAdminUserUpdate() {
 
         const inputWorkFromHome = document.querySelector("#work__from__home");
         const inputHybrid       = document.querySelector("#hybrid");        
@@ -643,44 +653,38 @@ export class Modal {
         const inputJunior       = document.querySelector("#junior");
         const inputMidLevel     = document.querySelector("#mid-level");
         const inputSenior       = document.querySelector("#senior");
-        const updateDataButton  = document.querySelector(".form__button");
-        const spanErrorMessage  = document.querySelector(".error__password");
         let   jobTypeSelected;
         let   proLevelSelected;
-
-        updateDataButton.addEventListener("click", async () => {
 
             if(inputWorkFromHome.checked) {
             
                 jobTypeSelected = "home office";
             
-            }else if(inputHybrid.checked) {
+            }if(inputHybrid.checked) {
             
-                jobTypeSelected = "híbrido";
+                jobTypeSelected = "hibrido";
             
-            }else if(inputOnSite.checked) {
+            }if(inputOnSite.checked) {
             
                 jobTypeSelected = "presencial";
             
-            }else if(inputIntern.checked) {
+            }if(inputIntern.checked) {
             
-                proLevelSelected = "estagiario";
+                proLevelSelected = "estágio";
         
-            }else if(inputJunior.checked) {
+            }
+            if(inputJunior.checked) {
                 
                 proLevelSelected = "júnior";
 
-            }else if(inputMidLevel.checked) {
-                
+            } 
+            if(inputMidLevel.checked) {
+               
                 proLevelSelected = "pleno";
             
-            }else if(inputSenior.checked) {
+            }if(inputSenior.checked) {
             
                 proLevelSelected = "sênior";
-            
-            } else {
-            
-                spanErrorMessage.innerText = "Please, select an option above.";
             
             }
 
@@ -689,14 +693,8 @@ export class Modal {
                 "professional_level": proLevelSelected,
             }
 
-           //REMOVER VALORES DA TAG ADD EVENT LISTENER!!!!!!!! INSERIR FUNÇÕES DENTRO DE UMA NOVA TAG (QUE É O BOTAO UPDATE) COM ADDEVENTLISTENER COM OS VALORES
-           //CAPTURADOS E DÊ RETURN EM DATA (BODY) PARA REAPROVEITÁ-LO NA OUTRA FUNÇÃO ACIMA...
+            return data;
 
-            const uuid = await Modal.handleAdminUserUpdateSelect();
-            console.log(uuid); //FUNCIONA APENAS AO CLICAR, MAS NÃO GUARDA VALOR ALGUM NA VARIÁVEL...
-            await Api.updateEmployeeDataAdmin(data, uuid);
-
-        });
     }
 
     static showAdminUserUpdate() {
@@ -704,13 +702,13 @@ export class Modal {
         const main             = document.querySelector("main");
         const updateDataButton = document.querySelector(".update__user__button__admin");
 
-        updateDataButton.addEventListener("click", () => {
+        updateDataButton.addEventListener("click", async () => {
         
             const sectionUpdateForm = Modal.adminUserUpdateForm();
             main.append(sectionUpdateForm);
             Modal.closeModal();
-            Modal.handleAdminUserUpdateSelect();
-            Modal.handleAdminUserUpdate();
+            await Modal.handleAdminUserUpdateSelect();
+            await Modal.handleAdminUserUpdate();
 
             const mainSection = document.querySelectorAll("section");
 
@@ -787,24 +785,24 @@ export class Modal {
                     console.log(user.uuid)
                     
                     const uuid = user.uuid;
-                    await Modal.showDeleteUserAdmin(uuid);
+                    await Modal.userDeletionAdmin(uuid);
                 }
             });
         });
         
     }
 
-    static async showDeleteUserAdmin(uuid) {
+    static async showDeleteUserAdmin() {
         
         const main                 = document.querySelector("main");
         const deleteUserButtonMenu = document.querySelector(".delete__user__button");
-        const modalDeleteButton    = document.querySelector(".form__button");
 
-        deleteUserButtonMenu.addEventListener("click", () => {
+        deleteUserButtonMenu.addEventListener("click", async () => {
         
             const sectionUpdateForm = Modal.deleteUserAdminForm();
             main.append(sectionUpdateForm);
-            Modal.handleDeleteUserAdmin();
+            await Modal.handleDeleteUserAdmin();
+            await Modal.userDeletionAdmin();
             Modal.closeModal();
 
             const mainSection = document.querySelectorAll("section");
@@ -818,14 +816,637 @@ export class Modal {
                 });
             }
         });
+    }
+
+    static userDeletionAdmin(uuid) {
+        
+        const modalDeleteButton = document.querySelector(".form__button");
 
         modalDeleteButton.addEventListener("click", () => {
         
             Api.deleteUser(uuid);
         
         });
+    
     }
 
-    static 
+    static registerCompanyForm() {
+
+        const sectionStandardUpdate = document.createElement("section");
+        const form                  = document.createElement("form");
+        const divTitle              = document.createElement("div");
+        const tagH1                 = document.createElement("h1");
+        const tagFontAwesome        = document.createElement("i");
+        const divInput              = document.createElement("div");
+        const labelNewCompanyName   = document.createElement("label");
+        const inputNewCompanyName   = document.createElement("input");
+        const labelOpeningHours     = document.createElement("label");
+        const inputOpeningHours     = document.createElement("input");
+        const labelDescription      = document.createElement("label");
+        const inputDescription      = document.createElement("input");
+        const labelSelectSector     = document.createElement("label");
+        const selectSector          = document.createElement("select");
+        const registerCompanyButton = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionStandardUpdate.classList.add("form__container", "form__user__standard__update");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divInput.classList.add("form__modal__container");
+        labelNewCompanyName.setAttribute("for", "form__company__name");
+        inputNewCompanyName.setAttribute("id", "form__company__name");
+        inputNewCompanyName.setAttribute("type", "text");
+        inputNewCompanyName.setAttribute("title", "Company Name");
+        inputNewCompanyName.setAttribute("name", "form__company__name");
+        inputNewCompanyName.setAttribute("required", "");
+        labelOpeningHours.setAttribute("for", "form__company__hours");
+        inputOpeningHours.setAttribute("id", "form__company__hours");
+        inputOpeningHours.setAttribute("type", "time");
+        inputOpeningHours.setAttribute("value", "00:00:00");
+        inputOpeningHours.setAttribute("title", "Opening Hours");
+        inputOpeningHours.setAttribute("name", "form__company__hours");
+        inputOpeningHours.setAttribute("required", "");
+        labelDescription.setAttribute("for", "form__company__description");
+        inputDescription.setAttribute("id", "form__company__description");
+        inputDescription.setAttribute("type", "text");
+        inputDescription.setAttribute("title", "Opening description");
+        inputDescription.setAttribute("name", "form__company__description");
+        inputDescription.setAttribute("required", "");
+        labelSelectSector.setAttribute("for", "select");
+        selectSector.setAttribute("id", "form__select__sector");
+        selectSector.setAttribute("required", "");
+        registerCompanyButton.classList.add("form__button");
+        registerCompanyButton.setAttribute("type", "button");
+
+        tagH1.innerText                 = "Register Company";
+        labelNewCompanyName.innerText   = "Company Name:";
+        inputNewCompanyName.placeholder = "Type company name here...";
+        labelOpeningHours.innerText     = "Opening Hours:";
+        labelDescription.innerText      = "Description:";
+        inputDescription.placeholder    = "Type description here...";
+        registerCompanyButton.innerText = "Register";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divInput.append(labelNewCompanyName, inputNewCompanyName, labelOpeningHours, inputOpeningHours, labelDescription, inputDescription, labelSelectSector, selectSector, registerCompanyButton);
+        divInput.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divInput);
+        sectionStandardUpdate.append(form);
+
+        return sectionStandardUpdate;     
+    
+    }
+
+    static async handleRegisterCompany(sector) {
+
+        const inputNewCompanyName   = document.querySelector("#form__company__name");
+        const inputOpeningHours     = document.querySelector("#form__company__hours");
+        const inputDescription      = document.querySelector("#form__company__description");
+        const registerCompanyButton = document.querySelector(".form__button");
+
+        registerCompanyButton.addEventListener("click", async () => {
+
+            const data = {
+                "name": inputNewCompanyName.value,
+                "opening_hours": inputOpeningHours.value,
+                "description": inputDescription.value,
+                "sector_uuid": sector,
+            }
+
+            await Api.registerCompany(data);
+
+        });
+    }
+
+    static showRegisterCompany() {
+    
+        const main                  = document.querySelector("main");
+        const registerCompanyButton = document.querySelector(".register__company");
+        
+        registerCompanyButton.addEventListener("click", async () => {
+        
+                const sectionUpdateForm = Modal.registerCompanyForm();
+                main.append(sectionUpdateForm);
+                Modal.closeModal();
+                await Modal.handleRegisterCompany();
+                await Modal.handleCompanyUpdateSelect();
+    
+                const mainSection = document.querySelectorAll("section");
+    
+                 if(mainSection.length > 1) {
+          
+                    mainSection.forEach(elem => {
+              
+                        elem.remove();
+              
+                });
+            }
+        });
+    }
+
+    static async handleCompanyUpdateSelect() {
+        
+        const allSectors   = await Api.listAllSectors();
+        const selectSector = document.querySelector("#form__select__sector");
+
+        allSectors.forEach(async (sector) => {
+
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__user__update");
+            optionTag.innerText = await sector.description;
+            selectSector.append(optionTag);
+        
+        });
+
+        selectSector.addEventListener("click", async (event) => {
+            
+            const selectedSector = event.target.value;
+
+            allSectors.forEach((sector) => {
+
+                if(selectedSector === sector.description) {
+
+                    const uuid = sector.uuid;
+
+                    Modal.handleRegisterCompany(uuid);
+                    
+                }
+            });
+        });
+    }
+
+    static allCompanyDepartmentsForm() {
+    
+        const sectionCompanyDepartments = document.createElement("section");
+        const form                      = document.createElement("form");
+        const divTitle                  = document.createElement("div");
+        const tagH1                     = document.createElement("h1");
+        const tagFontAwesome            = document.createElement("i");
+        const divSelect                 = document.createElement("div");
+        const labelSelectUser           = document.createElement("label");
+        const tagSelect                 = document.createElement("select");
+        const companyDepartmentsButton  = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionCompanyDepartments.classList.add("form__container", "form__company__departments");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divSelect.classList.add("form__modal__container");
+        labelSelectUser.setAttribute("for", "select");
+        tagSelect.setAttribute("id", "form__select__company__departments");
+        tagSelect.setAttribute("required", "");
+        companyDepartmentsButton.classList.add("form__button");
+        companyDepartmentsButton.setAttribute("type", "button");
+        
+        tagH1.innerText                    = "Departments By Company";
+        labelSelectUser.innerText          = "Select a Company:";
+        companyDepartmentsButton.innerText = "View Departments";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divSelect.append(labelSelectUser, tagSelect, companyDepartmentsButton);
+        divSelect.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divSelect);
+        sectionCompanyDepartments.append(form);
+        
+        return sectionCompanyDepartments;
+    
+    }
+
+    static async handleAllCompanyDepartments() {
+    
+        const allCompanies               = await Api.listCompanies();
+        const formCompanyDepartments     = document.querySelector(".form__company__departments")
+        const selectTag                  = document.querySelector("#form__select__company__departments");
+        const allCompanyDepartmentButton = document.querySelector(".form__button");
+
+        allCompanies.forEach(company => {
+            
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__user__departments");
+            optionTag.innerText = company.name;
+            selectTag.append(optionTag);
+        
+        });
+
+        let uuid;
+        let response;
+
+        formCompanyDepartments.addEventListener("click", async (event) => {
+            
+            const selectedCompany = event.target.value;
+
+            allCompanies.forEach(async (company) => {
+
+                if(selectedCompany === company.name) {
+
+                    uuid = await company.uuid;
+
+                }
+            });
+
+            if(allCompanyDepartmentButton === event.target) {
+                
+                response = await Api.listAllCompanyDepartments(uuid);
+                const ulContainerMain = document.querySelector(".main__list__container");
+                ulContainerMain.classList.remove("hidden");
+                ulContainerMain.innerHTML = "";
+                
+                if(response) {    
+
+                    response.forEach(department => {
+                        
+                        const liContainer            = document.createElement("li");
+                        const departmentName         = document.createElement("p");
+                        const departmentDescription  = document.createElement("p");
+                        const companyDepartmentTitle = document.createElement("p");
+                        const companyName            = document.createElement("p");
+                        const openingHours           = document.createElement("p");
+                        const companyDescription     = document.createElement("p");
+                        
+                        departmentName.innerText         = `Department Name: ${department.name}`;
+                        departmentDescription.innerText  = `Description: ${department.description}`;
+                        companyDepartmentTitle.innerText = `Company's Info:`;
+                        companyName.innerText            = `Company Name: ${department.companies.name}`;
+                        openingHours.innerText           = `Opening Hours: ${department.companies.opening_hours}`;
+                        companyDescription.innerText     = `Company Description: ${department.companies.description}`;
+
+                        liContainer.append(departmentName, departmentDescription, companyDepartmentTitle, companyName, openingHours, companyDescription);
+                        ulContainerMain.append(liContainer);
+                    
+                    });
+                }
+            }
+        });
+    }
+
+    static showAllCompanyDepartments() {
+    
+        const main                       = document.querySelector("main");
+        const departmentsByCompanyButton = document.querySelector(".departments__by__company");
+
+        departmentsByCompanyButton.addEventListener("click", async () => {
+        
+            const sectionDepartmentsForm = Modal.allCompanyDepartmentsForm();
+            main.append(sectionDepartmentsForm);
+            Modal.closeModal();
+            await Modal.handleAllCompanyDepartments();
+
+            const mainSection = document.querySelectorAll("section");
+
+             if(mainSection.length > 1) {
+      
+                mainSection.forEach(elem => {
+          
+                    elem.remove();
+          
+                });
+            }
+        });
+    }
+
+    static createDepartmentForm() {
+
+        const sectionCreateDepartment = document.createElement("section");
+        const form                    = document.createElement("form");
+        const divTitle                = document.createElement("div");
+        const tagH1                   = document.createElement("h1");
+        const tagFontAwesome          = document.createElement("i");
+        const divInput                = document.createElement("div");
+        const labelSelectCompany      = document.createElement("label");
+        const selectTag               = document.createElement("select");
+        const labelDepartmentName     = document.createElement("label");
+        const inputDepartmentName     = document.createElement("input");
+        const labelDescription        = document.createElement("label");
+        const inputDescription        = document.createElement("input");
+        const button                  = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionCreateDepartment.classList.add("form__container", "form__create__department");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divInput.classList.add("form__modal__container");
+        labelSelectCompany.setAttribute("for", "select");
+        selectTag.setAttribute("id", "form__select__create__department");
+        selectTag.setAttribute("required", "");
+        inputDepartmentName.setAttribute("id", "form__name__create__department");
+        inputDescription.setAttribute("id", "form__create__department__description");
+        button.classList.add("form__button");
+
+        labelDepartmentName.setAttribute("for", "name");
+        inputDepartmentName.setAttribute("type", "text");
+        inputDepartmentName.setAttribute("title", "name");
+        inputDepartmentName.setAttribute("name", "name");
+        labelDescription.setAttribute("for", "name");
+        inputDescription.setAttribute("type", "text");
+        inputDescription.setAttribute("title", "description");
+        inputDescription.setAttribute("name", "description");
+        button.setAttribute("type", "button");
+
+        tagH1.innerText                 = "Create Department";
+        labelSelectCompany.innerText    = "Select Company:";
+        labelDepartmentName.innerText   = "Department Name: ";
+        inputDepartmentName.placeholder = "Type new department here...";
+        labelDescription.innerText      = "Department Description:";
+        inputDescription.placeholder    = "Type description here...";
+        button.innerText                = "Create";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divInput.append(labelSelectCompany, selectTag, labelDepartmentName, inputDepartmentName, labelDescription, inputDescription, button);
+        divInput.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divInput);
+        sectionCreateDepartment.append(form);
+
+        return sectionCreateDepartment;
+    
+    }
+
+    static async handleCreateDepartment() {
+
+        const allCompanies               = await Api.listCompanies();
+        const labelDepartmentName        = document.querySelector("#form__name__create__department");
+        const inputDescription           = document.querySelector("#form__create__department__description");
+        const selectTag                  = document.querySelector("#form__select__create__department");
+        const allCompanyDepartmentButton = document.querySelector(".form__button");
+        let   uuid;
+
+        allCompanies.forEach(async (company) => {
+            
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__create__department");
+            optionTag.innerText = await company.name;
+            selectTag.append(optionTag);
+        
+        });
+
+        selectTag.addEventListener("click", async (event) => {
+            
+            const selectedCompany = event.target.value;
+
+            allCompanies.forEach(async (company) => {
+
+                if(selectedCompany === company.name) {
+
+                    uuid = await company.uuid;
+
+                }
+            });
+        });
+
+        allCompanyDepartmentButton.addEventListener("click", async () => {
+        
+            const data = {
+                "name": labelDepartmentName.value,
+                "description": inputDescription.value,
+                "company_uuid": uuid,
+            }
+
+            await Api.createDepartment(data);
+        
+        });
+    }
+
+    static async showCreateDepartment() {
+        
+        const main                   = document.querySelector("main");
+        const createDepartmentButton = document.querySelector(".create__department");
+        
+        createDepartmentButton.addEventListener("click", async () => {
+            
+                const sectionLogin = Modal.createDepartmentForm();
+                main.append(sectionLogin);
+                Modal.closeModal();
+                await Modal.handleCreateDepartment();
+                
+                const mainSection = document.querySelectorAll("section");
+
+                if(mainSection.length > 1) {
+                
+                    mainSection.forEach(elem => {
+                    
+                        elem.remove();
+                    
+                });
+            }
+        });
+    }
+
+    static async hireEmployeeForm() {
+        
+        const sectionHire      = document.createElement("section");
+        const form             = document.createElement("form");
+        const divTitle         = document.createElement("div");
+        const tagH1            = document.createElement("h1");
+        const tagFontAwesome   = document.createElement("i");
+        const divSelect        = document.createElement("div");
+        const labelUser        = document.createElement("label");
+        const selectUser       = document.createElement("select");
+        const labelDepartment  = document.createElement("label");
+        const selectDepartment = document.createElement("select"); 
+        const button           = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionHire.classList.add("form__container", "form__hire");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divSelect.classList.add("form__modal__container");
+        selectUser.setAttribute("id", "form__select__user__hire");
+        selectDepartment.setAttribute("id", "form__select__department__hire");
+        button.classList.add("form__button");
+
+        labelUser.setAttribute("for", "user");
+        selectUser.setAttribute("title", "Select User");
+        selectUser.setAttribute("required", "");
+        labelDepartment.setAttribute("for", "user");
+        selectDepartment.setAttribute("title", "Select Department");
+        selectDepartment.setAttribute("required", "");
+        button.setAttribute("type", "button");
+
+        tagH1.innerText           = "Hire Employee";
+        labelUser.innerText       = "Select Employee: ";
+        labelDepartment.innerText = "Select Department:";
+        button.innerText          = "Hire";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divSelect.append(labelUser, selectUser, labelDepartment, selectDepartment, button);
+        divSelect.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divSelect);
+        
+        sectionHire.append(form);
+
+        return sectionHire;
+
+
+    }
+
+    static async handleHireEmployee() {
+    
+        const noDepartmentUsers = await Api.noDepartmentUsers();
+        const allDepartments    = await Api.listAllDepartments();
+        const formHire          = document.querySelector(".form__hire");
+        const selectUserTag     = document.querySelector("#form__select__user__hire");
+        const selectDepartment  = document.querySelector("#form__select__department__hire");
+        const hireButton        = document.querySelector(".form__button");
+        let   userUuid;
+        let   departmentUuid;
+
+        console.log(selectUserTag)
+        noDepartmentUsers.forEach(async (unemployed) => {
+
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__hire__user");
+            optionTag.innerText = await unemployed.username;
+            selectUserTag.append(optionTag);
+           
+        
+        });
+
+        allDepartments.forEach(async (department) => {
+        
+            const optionTag = document.createElement("option");
+            optionTag.setAttribute("id", "option__select__department__hire");
+            optionTag.innerText = await department.name;
+            selectDepartment.append(optionTag);
+        
+        });
+
+        formHire.addEventListener("click", async (event) => {
+            
+            const selectedUser       = event.target.value;
+            const selectedDepartment = event.target.value;
+
+            noDepartmentUsers.forEach(async (user) => {
+
+                if(selectedUser === user.username) {
+
+                    userUuid = await user.uuid;
+
+                }
+            });
+
+            allDepartments.forEach(async (department) => {
+            
+                if(selectedDepartment === department.name) {
+                    
+                    departmentUuid = await department.uuid;
+
+                }
+            })
+
+            if(hireButton === event.target) {
+            
+                const data = {
+                    "user_uuid": userUuid,
+                    "department_uuid": departmentUuid,
+               }
+            
+               await Api.hireEmployee(data);
+
+            }
+        });
+    }
+
+    static async showHireEmployee() {
+        
+        const main               = document.querySelector("main");
+        const hireEmployeeButton = document.querySelectorAll(".hire__employee");
+
+        hireEmployeeButton.forEach(element => {
+        
+            element.addEventListener("click", async () => {
+            
+                const sectionHire = await Modal.hireEmployeeForm();
+                main.append(sectionHire);
+                Modal.closeModal();
+                await Modal.handleHireEmployee();
+                
+                const mainSection = document.querySelectorAll("section");
+
+                if(mainSection.length > 1) {
+                
+                    mainSection.forEach(elem => {
+                    
+                        elem.remove();
+                    
+                    });
+                }
+            });
+        });
+    }
+
+    static fireEmployeeForm() {
+    
+        const sectionFire       = document.createElement("section");
+        const form              = document.createElement("form");
+        const divTitle          = document.createElement("div");
+        const tagH1             = document.createElement("h1");
+        const tagFontAwesome    = document.createElement("i");
+        const divSelect         = document.createElement("div");
+        const labelSelectUser   = document.createElement("label");
+        const tagSelect         = document.createElement("select");
+        const fireButton        = document.createElement("button");
+        const tagP = `<p>© 2022 Kenzie Enterprises™ | All Rights Reserved</p>`;
+        
+        sectionFire.classList.add("form__container", "form__fire");
+        form.classList.add("form__modal");
+        divTitle.classList.add("form__title__container");
+        tagFontAwesome.classList.add("fa-solid", "fa-xmark");
+        divSelect.classList.add("form__modal__container");
+        labelSelectUser.setAttribute("for", "select");
+        tagSelect.setAttribute("id", "form__select__fire");
+        tagSelect.setAttribute("required", "");
+        fireButton.classList.add("form__button");
+        fireButton.setAttribute("type", "button");
+        
+        tagH1.innerText           = "Fire Employee";
+        labelSelectUser.innerText = "Select Employee to Fire:";
+        fireButton.innerText      = "Fire";
+
+        divTitle.append(tagH1, tagFontAwesome);
+        divSelect.append(labelSelectUser, tagSelect, fireButton);
+        divSelect.insertAdjacentHTML("beforeend", tagP);
+        form.append(divTitle, divSelect);
+        sectionFire.append(form);
+        
+        return sectionFire;
+    
+    }
+
+    static handleFireEmployee() {
+    
+        
+
+    }
+
+    static showFireEmployee() {
+    
+        const main               = document.querySelector("main");
+        const hireEmployeeButton = document.querySelectorAll(".fire__employee");
+
+        hireEmployeeButton.forEach(element => {
+        
+            element.addEventListener("click", async () => {
+            
+                const sectionFire = await Modal.fireEmployeeForm();
+                main.append(sectionFire);
+                Modal.closeModal();
+                await Modal.handleFireEmployee();
+                
+                const mainSection = document.querySelectorAll("section");
+
+                if(mainSection.length > 1) {
+                
+                    mainSection.forEach(elem => {
+                    
+                        elem.remove();
+                    
+                    });
+                }
+            });
+        });
+    
+    }
 
 }

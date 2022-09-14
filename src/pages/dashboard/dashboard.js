@@ -33,7 +33,7 @@ export class Dashboard {
 
         modeButton.addEventListener("click", () => {
             
-                html.classList.toggle("dark__mode");
+            html.classList.toggle("dark__mode");
             
         });
     
@@ -132,11 +132,11 @@ export class Dashboard {
     }
 
     static resetScreen() {
-    
-        const main            = document.querySelector("main");
+
+        const resetButton  = document.querySelector(".fa-arrow-rotate-left");
         const ulContainerMain = document.querySelector(".main__list__container");
 
-        main.addEventListener("click", () => {
+        resetButton.addEventListener("click", () => {
         
             ulContainerMain.classList.add("hidden");
             ulContainerMain.innerHTML = "";
@@ -191,43 +191,28 @@ export class Dashboard {
                 ulContainerMain.classList.toggle("hidden");
                 ulContainerMain.innerHTML = "";
 
-                // "uuid": "fc65d0be-507e-4c6e-badc-ccc4417ef980",
-                // "name": "TI",
-                // "description": "Departamento de TI",
-                // "company_uuid": "3a1746a3-c8e4-4a77-8e55-5de43ef245f8",
-                // "users": [
-                //     {
-                //         "uuid": "0212ff4a-94de-4c97-8fbf-e7e4bb06e258",
-                //         "username": "Teste",
-                //         "email": "mail@mail.com",
-                //         "password": "$2a$08$YijK0p9TBsDW9UIyc3NPjuoFzHq3/WGUWXTp/SlNeEWCITWpYqLwO",
-                //         "professional_level": "sênior",
-                //         "kind_of_work": null,
-                //         "is_admin": false,
-                //         "department_uuid": "fc65d0be-507e-4c6e-badc-ccc4417ef980"
+                allCoworkersData.forEach(coworker => {
 
-                const liContainer     = document.createElement("li");
-                const sector          = document.createElement("p");
-                const description     = document.createElement("p");
-                const usersTitle      = document.createElement("p");
-                const username        = document.createElement("p");
-                const email           = document.createElement("p");
-                const proLevel        = document.createElement("p");
-                const kindofWork      = document.createComment("p");
+                    const liContainer     = document.createElement("li");
+                    const sector          = document.createElement("p");
+                    const description     = document.createElement("p");
+                    const usersTitle      = document.createElement("p");
+                    const username        = document.createElement("p");
+                    const email           = document.createElement("p");
+                    const proLevel        = document.createElement("p");
+                    const kindofWork      = document.createComment("p");
 
-                sector.innerText      = `Sector: ${allCoworkersData.name}`;
-                description.innerText = `Description: ${allCoworkersData.description}`;
-                usersTitle.innerText  = `Your Coworkers: `;
-
-                 (allCoworkersData.users).forEach(coworkers => {
-                
-                    username.innerText    = `Username: ${coworkers.coworkersname}`;
-                    email.innerText       = `Email: ${coworkers.email}`;
-                    proLevel.innerText    = `Professional Level: ${coworkers.professional_level}`;
-                    kindofWork.innerText  = `Job: ${coworkers.kind_of_work}`;
+                    sector.innerText      = `Sector: ${coworker.name}`;
+                    description.innerText = `Description: ${coworker.description}`;
+                    usersTitle.innerText  = `Your Coworkers: `;
+                    username.innerText    = `Username: ${coworker.users.name}`;
+                    email.innerText       = `Email: ${coworker.users.email}`;
+                    proLevel.innerText    = `Professional Level: ${coworker.users.professional_level}`;
+                    kindofWork.innerText  = `Job: ${coworker.users.kind_of_work}`;
 
                     liContainer.append(sector, description, username, email, proLevel, kindofWork);
                     ulContainerMain.append(liContainer);
+                
             });
         });
     }
@@ -243,43 +228,22 @@ export class Dashboard {
             ulContainerMain.classList.toggle("hidden");
             ulContainerMain.innerHTML = "";
 
-            // {
-            //     "uuid": "3a1746a3-c8e4-4a77-8e55-5de43ef245f8",
-            //     "name": "Nerd lab",
-            //     "opening_hours": "09:00",
-            //     "description": "Criamos um site rapidão pra você",
-            //     "sector_uuid": "17247c6b-5205-4067-9695-278fcb97d592",
-            //     "departments": [
-            //         {
-            //             "uuid": "fc65d0be-507e-4c6e-badc-ccc4417ef980",
-            //             "name": "TI",
-            //             "description": "Departamento de TI",
-            //             "company_uuid": "3a1746a3-c8e4-4a77-8e55-5de43ef245f8"
-            //         },
-            //         {
-            //             "uuid": "09b216d6-6f25-4ad6-89f4-6eece6602feb",
-            //             "name": "RH",
-            //             "description": "Recrutamento e seleção",
-            //             "company_uuid": "3a1746a3-c8e4-4a77-8e55-5de43ef245f8"
-            //         }
-                
-            const liContainer           = document.createElement("li");
-            const companyName           = document.createElement("p");
-            const openingHours          = document.createElement("p");
-            const companyDescription    = document.createElement("p");
-            const departmentsTitle      = document.createElement("p");
-            const departmentName        = document.createElement("p");
-            const departmentDescription = document.createElement("p");
+            usersDepartments.forEach(department => {
 
-            companyName.innerText        = `Company Name: ${usersDepartments.name}`;
-            openingHours.innerText       = `Opens: ${usersDepartments.opening_hours}`;
-            companyDescription.innerText = `Description: ${usersDepartments.description}`;
-            departmentsTitle.innerText   = `All Company Departments: `;
+                const liContainer           = document.createElement("li");
+                const companyName           = document.createElement("p");
+                const openingHours          = document.createElement("p");
+                const companyDescription    = document.createElement("p");
+                const departmentsTitle      = document.createElement("p");
+                const departmentName        = document.createElement("p");
+                const departmentDescription = document.createElement("p");
 
-            (usersDepartments.users).forEach(departments => {
-                
-                departmentName.innerText        = `Department's Name: ${departments.name}`;
-                departmentDescription.innerText = `Department Description: ${departments.description}`;
+                companyName.innerText        = `Company Name: ${department.name}`;
+                openingHours.innerText       = `Opens: ${department.opening_hours}`;
+                companyDescription.innerText = `Description: ${department.description}`;
+                departmentsTitle.innerText   = `All Company Departments: `;
+                departmentName.innerText        = `Department's Name: ${department.departments.name}`;
+                departmentDescription.innerText = `Department Description: ${department.departments.description}`;
 
                 liContainer.append(companyName, openingHours, companyDescription, departmentsTitle, departmentName, departmentDescription);
                 ulContainerMain.append(liContainer);
@@ -359,7 +323,57 @@ export class Dashboard {
 
     }
 
+    static async renderAllSectors() {
+
+        const ulContainerMain  = document.querySelector(".main__list__container");
+        const allSectorsButton = document.querySelector(".list__all__sectors");
+
+        allSectorsButton.addEventListener("click", async () => {
+            
+            const allSectors = await Api.listAllSectors();
+            ulContainerMain.classList.remove("hidden");
+            ulContainerMain.innerHTML = "";
+
+            allSectors.forEach(sector => {
+                
+                const liContainer = document.createElement("li");
+                const description = document.createElement("p");
     
+                description.innerText = `Sector: ${sector.description}`;
+
+                liContainer.append(description);
+                ulContainerMain.append(liContainer);
+            
+            });
+        });
+    }
+
+    static renderAllDepartments() {
+    
+        const ulContainerMain      = document.querySelector(".main__list__container");
+        const allDepartmentsButton = document.querySelector(".all__departments");
+
+        allDepartmentsButton.addEventListener("click", async () => {
+            
+            const allDepartments = await Api.listAllDepartments();
+            ulContainerMain.classList.remove("hidden");
+            ulContainerMain.innerHTML = "";
+
+            allDepartments.forEach(department => {
+                
+                const liContainer = document.createElement("li");
+                const description = document.createElement("p");
+    
+                description.innerText = `Department: ${department.description}`;
+
+                liContainer.append(description);
+                ulContainerMain.append(liContainer);
+            
+            });
+        });
+    }
+
+
 
 }
 
@@ -378,3 +392,10 @@ Dashboard.renderAllEmployees();
 Dashboard.renderNoDepartmentUsers();
 Modal.showAdminUserUpdate();
 Modal.showDeleteUserAdmin();
+Dashboard.renderAllSectors();
+Dashboard.renderAllDepartments();
+Modal.showRegisterCompany();
+Modal.showAllCompanyDepartments();
+Modal.showCreateDepartment();
+Modal.showHireEmployee();
+Modal.showFireEmployee();
